@@ -29,14 +29,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             button1 = new Button();
             textBoxLoginPassword = new TextBox();
             textBoxLoginEmail = new TextBox();
+            pictureBox1 = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // button1
             // 
-            button1.Location = new Point(132, 346);
+            button1.Location = new Point(119, 357);
             button1.Name = "button1";
             button1.Size = new Size(112, 56);
             button1.TabIndex = 0;
@@ -46,7 +49,7 @@
             // 
             // textBoxLoginPassword
             // 
-            textBoxLoginPassword.Location = new Point(84, 228);
+            textBoxLoginPassword.Location = new Point(84, 324);
             textBoxLoginPassword.Name = "textBoxLoginPassword";
             textBoxLoginPassword.PlaceholderText = "Password";
             textBoxLoginPassword.Size = new Size(186, 27);
@@ -56,21 +59,36 @@
             // 
             // textBoxLoginEmail
             // 
-            textBoxLoginEmail.Location = new Point(84, 135);
+            textBoxLoginEmail.Location = new Point(84, 125);
             textBoxLoginEmail.Name = "textBoxLoginEmail";
             textBoxLoginEmail.PlaceholderText = "Email";
             textBoxLoginEmail.Size = new Size(186, 27);
             textBoxLoginEmail.TabIndex = 2;
             textBoxLoginEmail.TextChanged += textBox2_TextChanged;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Dock = DockStyle.Fill;
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(0, 0);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(341, 474);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 3;
+            pictureBox1.TabStop = false;
+            pictureBox1.Click += pictureBox1_Click;
+            // 
             // Form1
             // 
+            BackColor = Color.Azure;
             ClientSize = new Size(341, 474);
             Controls.Add(textBoxLoginEmail);
             Controls.Add(textBoxLoginPassword);
             Controls.Add(button1);
+            Controls.Add(pictureBox1);
             Name = "Form1";
             Load += Form1_Load;
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
 
@@ -81,5 +99,6 @@
         private Button button1;
         private TextBox textBoxLoginPassword;
         protected internal TextBox textBoxLoginEmail;
+        private PictureBox pictureBox1;
     }
 }

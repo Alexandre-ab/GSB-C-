@@ -38,7 +38,7 @@
             dataGridViewDoctorListListMedecine.Location = new Point(86, 48);
             dataGridViewDoctorListListMedecine.Name = "dataGridViewDoctorListListMedecine";
             dataGridViewDoctorListListMedecine.RowHeadersWidth = 51;
-            dataGridViewDoctorListListMedecine.Size = new Size(606, 280);
+            dataGridViewDoctorListListMedecine.Size = new Size(624, 344);
             dataGridViewDoctorListListMedecine.TabIndex = 0;
             dataGridViewDoctorListListMedecine.CellContentClick += dataGridViewDoctorListListMedecine_CellContentClick;
             // 
