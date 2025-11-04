@@ -19,15 +19,13 @@ public class UserDAO
         {
             try { 
 
-             SHA256 sha256 = SHA256.Create();
-            byte[] hashValue = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
-            string hashString = BitConverter.ToString(hashValue).Replace("-", "").ToLowerInvariant();
+             
             connection.Open();
 
                 // create a MySQL command and set the SQL statement with parameters
                 MySqlCommand myCommand = new MySqlCommand();
                 myCommand.Connection = connection;
-                myCommand.CommandText = @"SELECT * FROM users WHERE email = @email AND password = @password;";
+                myCommand.CommandText = @"SELECT * FROM Users WHERE email = @email AND password = SHA2(@password, 256)";
                 myCommand.Parameters.AddWithValue("@email", email);
                 myCommand.Parameters.AddWithValue("@password", password);
 
@@ -37,7 +35,7 @@ public class UserDAO
                 {
                     if (myReader.Read())
                     {
-                        id = myReader.GetInt32("user_id");
+                        id = myReader.GetInt32("id_users" );
                         name = myReader.GetString("name");
                         firstname = myReader.GetString("firstname");
                         role = myReader.GetBoolean("role");

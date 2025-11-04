@@ -19,14 +19,14 @@ public class PatientsDAO
 
                 MySqlCommand myCommand = new MySqlCommand();
                 myCommand.Connection = connection;
-                myCommand.CommandText = "SELECT * FROM patients;";
+                myCommand.CommandText = "SELECT * FROM Patients;";
 
                 using var myReader = myCommand.ExecuteReader();
                 {
                     while (myReader.Read())
                     {
-                        int patientId = myReader.GetInt32("patient_id");
-                        int userId = myReader.GetInt32("user_id");
+                        int patientId = myReader.GetInt32("id_patients");
+                        int userId = myReader.GetInt32("id_users");
                         string name = myReader.GetString("name");
                         string firstname = myReader.GetString("firstname");
                         string lastname = myReader.GetString("lastname");
@@ -59,14 +59,14 @@ public class PatientsDAO
 
                 MySqlCommand myCommand = new MySqlCommand();
                 myCommand.Connection = connection;
-                myCommand.CommandText = "SELECT * FROM patients WHERE patient_id = @patientId;";
+                myCommand.CommandText = "SELECT * FROM Patients WHERE id_patients = @patientId;";
                 myCommand.Parameters.AddWithValue("@patientId", patientId);
 
                 using var myReader = myCommand.ExecuteReader();
                 {
                     if (myReader.Read())
                     {
-                        int userId = myReader.GetInt32("user_id");
+                        int userId = myReader.GetInt32("id_users");
                         string name = myReader.GetString("name");
                         string firstname = myReader.GetString("firstname");
                         string lastname = myReader.GetString("lastname");
@@ -101,14 +101,14 @@ public class PatientsDAO
 
                 MySqlCommand myCommand = new MySqlCommand();
                 myCommand.Connection = connection;
-                myCommand.CommandText = "SELECT * FROM patients WHERE user_id = @userId;";
+                myCommand.CommandText = "SELECT * FROM Patients WHERE id_users= @userId;";
                 myCommand.Parameters.AddWithValue("@userId", userId);
 
                 using var myReader = myCommand.ExecuteReader();
                 {
                     while (myReader.Read())
                     {
-                        int patientId = myReader.GetInt32("patient_id");
+                        int patientId = myReader.GetInt32("id_patients");
                         string name = myReader.GetString("name");
                         string firstname = myReader.GetString("firstname");
                         string lastname = myReader.GetString("lastname");
@@ -141,7 +141,7 @@ public class PatientsDAO
 
                 MySqlCommand myCommand = new MySqlCommand();
                 myCommand.Connection = connection;
-                myCommand.CommandText = @"INSERT INTO patients (user_id, name, firstname, lastname, age, gender) 
+                myCommand.CommandText = @"INSERT INTO Patients (id_users, name, firstname, lastname, age, gender) 
                                          VALUES (@userId, @name, @firstname, @lastname, @age, @gender);";
                 myCommand.Parameters.AddWithValue("@userId", patient.UserId);
                 myCommand.Parameters.AddWithValue("@name", patient.Name);
@@ -173,7 +173,7 @@ public class PatientsDAO
 
                 MySqlCommand myCommand = new MySqlCommand();
                 myCommand.Connection = connection;
-                myCommand.CommandText = @"UPDATE patients SET user_id = @userId, name = @name, 
+                myCommand.CommandText = @"UPDATE Patients SET id_users = @userId, name = @name, 
                                          firstname = @firstname, lastname = @lastname, age = @age, gender = @gender 
                                          WHERE patient_id = @patientId;";
                 myCommand.Parameters.AddWithValue("@patientId", patient.PatientID);
@@ -207,7 +207,7 @@ public class PatientsDAO
 
                 MySqlCommand myCommand = new MySqlCommand();
                 myCommand.Connection = connection;
-                myCommand.CommandText = "DELETE FROM patients WHERE patient_id = @patientId;";
+                myCommand.CommandText = "DELETE FROM Patients WHERE id_patients = @patientId;";
                 myCommand.Parameters.AddWithValue("@patientId", patientId);
 
                 int rowsAffected = myCommand.ExecuteNonQuery();

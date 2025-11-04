@@ -19,14 +19,14 @@ public class AppartientDAO
 
                 MySqlCommand myCommand = new MySqlCommand();
                 myCommand.Connection = connection;
-                myCommand.CommandText = "SELECT * FROM appartient;";
+                myCommand.CommandText = "SELECT * FROM Appartient;";
 
                 using var myReader = myCommand.ExecuteReader();
                 {
                     while (myReader.Read())
                     {
-                        int prescriptionId = myReader.GetInt32("prescription_id");
-                        int medicineId = myReader.GetInt32("medicine_id");
+                        int prescriptionId = myReader.GetInt32("id_prescription");
+                        int medicineId = myReader.GetInt32("id_medicine");
 
                         Appartient appartient = new Appartient(prescriptionId, medicineId);
                         appartients.Add(appartient);
@@ -56,14 +56,14 @@ public class AppartientDAO
 
                 MySqlCommand myCommand = new MySqlCommand();
                 myCommand.Connection = connection;
-                myCommand.CommandText = "SELECT medicine_id FROM appartient WHERE prescription_id = @prescriptionId;";
+                myCommand.CommandText = "SELECT id_medicine FROM Appartient WHERE id_prescription= @prescriptionId;";
                 myCommand.Parameters.AddWithValue("@prescriptionId", prescriptionId);
 
                 using var myReader = myCommand.ExecuteReader();
                 {
                     while (myReader.Read())
                     {
-                        int medicineId = myReader.GetInt32("medicine_id");
+                        int medicineId = myReader.GetInt32("id_medicine");
                         medicineIds.Add(medicineId);
                     }
                 }
@@ -91,14 +91,14 @@ public class AppartientDAO
 
                 MySqlCommand myCommand = new MySqlCommand();
                 myCommand.Connection = connection;
-                myCommand.CommandText = "SELECT prescription_id FROM appartient WHERE medicine_id = @medicineId;";
+                myCommand.CommandText = "SELECT id_prescription FROM Appartient WHERE id_medicine = @medicineId;";
                 myCommand.Parameters.AddWithValue("@medicineId", medicineId);
 
                 using var myReader = myCommand.ExecuteReader();
                 {
                     while (myReader.Read())
                     {
-                        int prescriptionId = myReader.GetInt32("prescription_id");
+                        int prescriptionId = myReader.GetInt32("id_prescription");
                         prescriptionIds.Add(prescriptionId);
                     }
                 }
@@ -124,7 +124,7 @@ public class AppartientDAO
 
                 MySqlCommand myCommand = new MySqlCommand();
                 myCommand.Connection = connection;
-                myCommand.CommandText = @"INSERT INTO appartient (prescription_id, medicine_id) 
+                myCommand.CommandText = @"INSERT INTO Appartient (id_prescription, id_medicine) 
                                          VALUES (@prescriptionId, @medicineId);";
                 myCommand.Parameters.AddWithValue("@prescriptionId", appartient.PrescriptionId);
                 myCommand.Parameters.AddWithValue("@medicineId", appartient.MedicineId);
@@ -152,8 +152,8 @@ public class AppartientDAO
 
                 MySqlCommand myCommand = new MySqlCommand();
                 myCommand.Connection = connection;
-                myCommand.CommandText = @"DELETE FROM appartient 
-                                         WHERE prescription_id = @prescriptionId AND medicine_id = @medicineId;";
+                myCommand.CommandText = @"DELETE FROM Appartient 
+                                         WHERE id_prescription = @prescriptionId AND id_medicine= @medicineId;";
                 myCommand.Parameters.AddWithValue("@prescriptionId", prescriptionId);
                 myCommand.Parameters.AddWithValue("@medicineId", medicineId);
 
@@ -180,7 +180,7 @@ public class AppartientDAO
 
                 MySqlCommand myCommand = new MySqlCommand();
                 myCommand.Connection = connection;
-                myCommand.CommandText = "DELETE FROM appartient WHERE prescription_id = @prescriptionId;";
+                myCommand.CommandText = "DELETE FROM Appartient WHERE id_prescription = @prescriptionId;";
                 myCommand.Parameters.AddWithValue("@prescriptionId", prescriptionId);
 
                 int rowsAffected = myCommand.ExecuteNonQuery();
@@ -206,7 +206,7 @@ public class AppartientDAO
 
                 MySqlCommand myCommand = new MySqlCommand();
                 myCommand.Connection = connection;
-                myCommand.CommandText = "DELETE FROM appartient WHERE medicine_id = @medicineId;";
+                myCommand.CommandText = "DELETE FROM Appartient WHERE id_medicine = @medicineId;";
                 myCommand.Parameters.AddWithValue("@medicineId", medicineId);
 
                 int rowsAffected = myCommand.ExecuteNonQuery();

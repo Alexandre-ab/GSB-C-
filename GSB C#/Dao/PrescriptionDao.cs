@@ -19,15 +19,15 @@ public class PrescriptionDAO
 
                 MySqlCommand myCommand = new MySqlCommand();
                 myCommand.Connection = connection;
-                myCommand.CommandText = "SELECT * FROM prescriptions;";
+                myCommand.CommandText = "SELECT * FROM Prescription;";
 
                 using var myReader = myCommand.ExecuteReader();
                 {
                     while (myReader.Read())
                     {
-                        int prescriptionId = myReader.GetInt32("prescription_id");
-                        int patientId = myReader.GetInt32("patient_id");
-                        int userId = myReader.GetInt32("user_id");
+                        int prescriptionId = myReader.GetInt32("id_prescription");
+                        int patientId = myReader.GetInt32("id_patients");
+                        int userId = myReader.GetInt32("id_users");
                         int quantity = myReader.GetInt32("quantity");
                         bool validity = myReader.GetBoolean("validity");
 
@@ -57,15 +57,15 @@ public class PrescriptionDAO
 
                 MySqlCommand myCommand = new MySqlCommand();
                 myCommand.Connection = connection;
-                myCommand.CommandText = "SELECT * FROM prescriptions WHERE prescription_id = @prescriptionId;";
+                myCommand.CommandText = "SELECT * FROM Prescription WHERE id_prescription = @prescriptionId;";
                 myCommand.Parameters.AddWithValue("@prescriptionId", prescriptionId);
 
                 using var myReader = myCommand.ExecuteReader();
                 {
                     if (myReader.Read())
                     {
-                        int patientId = myReader.GetInt32("patient_id");
-                        int userId = myReader.GetInt32("user_id");
+                        int patientId = myReader.GetInt32("id_patients");
+                        int userId = myReader.GetInt32("users_id");
                         int quantity = myReader.GetInt32("quantity");
                         bool validity = myReader.GetBoolean("validity");
 
@@ -97,15 +97,15 @@ public class PrescriptionDAO
 
                 MySqlCommand myCommand = new MySqlCommand();
                 myCommand.Connection = connection;
-                myCommand.CommandText = "SELECT * FROM prescriptions WHERE patient_id = @patientId;";
+                myCommand.CommandText = "SELECT * FROM Prescriptions WHERE id_patients= @patientId;";
                 myCommand.Parameters.AddWithValue("@patientId", patientId);
 
                 using var myReader = myCommand.ExecuteReader();
                 {
                     while (myReader.Read())
                     {
-                        int prescriptionId = myReader.GetInt32("prescription_id");
-                        int userId = myReader.GetInt32("user_id");
+                        int prescriptionId = myReader.GetInt32("id_prescription");
+                        int userId = myReader.GetInt32("id_users");
                         int quantity = myReader.GetInt32("quantity");
                         bool validity = myReader.GetBoolean("validity");
 
@@ -137,15 +137,15 @@ public class PrescriptionDAO
 
                 MySqlCommand myCommand = new MySqlCommand();
                 myCommand.Connection = connection;
-                myCommand.CommandText = "SELECT * FROM prescriptions WHERE user_id = @userId;";
+                myCommand.CommandText = "SELECT * FROM Prescription WHERE id_users = @userId;";
                 myCommand.Parameters.AddWithValue("@userId", userId);
 
                 using var myReader = myCommand.ExecuteReader();
                 {
                     while (myReader.Read())
                     {
-                        int prescriptionId = myReader.GetInt32("prescription_id");
-                        int patientId = myReader.GetInt32("patient_id");
+                        int prescriptionId = myReader.GetInt32("id_prescription");
+                        int patientId = myReader.GetInt32("id_patients");
                         int quantity = myReader.GetInt32("quantity");
                         bool validity = myReader.GetBoolean("validity");
 
@@ -175,7 +175,7 @@ public class PrescriptionDAO
 
                 MySqlCommand myCommand = new MySqlCommand();
                 myCommand.Connection = connection;
-                myCommand.CommandText = @"INSERT INTO prescriptions (patient_id, user_id, quantity, validity) 
+                myCommand.CommandText = @"INSERT INTO Prescription (id_patients, id_users, quantity, validity) 
                                          VALUES (@patientId, @userId, @quantity, @validity);";
                 myCommand.Parameters.AddWithValue("@patientId", prescription.patientId);
                 myCommand.Parameters.AddWithValue("@userId", prescription.UserId);
@@ -205,7 +205,7 @@ public class PrescriptionDAO
 
                 MySqlCommand myCommand = new MySqlCommand();
                 myCommand.Connection = connection;
-                myCommand.CommandText = @"UPDATE prescriptions SET patient_id = @patientId, user_id = @userId, 
+                myCommand.CommandText = @"UPDATE Prescription SET id_patients = @patientId, id_users = @userId, 
                                          quantity = @quantity, validity = @validity 
                                          WHERE prescription_id = @prescriptionId;";
                 myCommand.Parameters.AddWithValue("@prescriptionId", prescription.prescriptionId);
@@ -237,7 +237,7 @@ public class PrescriptionDAO
 
                 MySqlCommand myCommand = new MySqlCommand();
                 myCommand.Connection = connection;
-                myCommand.CommandText = "DELETE FROM prescriptions WHERE prescription_id = @prescriptionId;";
+                myCommand.CommandText = "DELETE FROM Prescription WHERE id_prescription = @prescriptionId;";
                 myCommand.Parameters.AddWithValue("@prescriptionId", prescriptionId);
 
                 int rowsAffected = myCommand.ExecuteNonQuery();

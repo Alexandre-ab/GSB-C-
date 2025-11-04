@@ -28,12 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "FormDoctor";
+            dataGridViewDoctorListListMedecine = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewDoctorListListMedecine).BeginInit();
+            SuspendLayout();
+            // 
+            // dataGridViewDoctorListListMedecine
+            // 
+            dataGridViewDoctorListListMedecine.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewDoctorListListMedecine.Location = new Point(86, 48);
+            dataGridViewDoctorListListMedecine.Name = "dataGridViewDoctorListListMedecine";
+            dataGridViewDoctorListListMedecine.RowHeadersWidth = 51;
+            dataGridViewDoctorListListMedecine.Size = new Size(606, 280);
+            dataGridViewDoctorListListMedecine.TabIndex = 0;
+            dataGridViewDoctorListListMedecine.CellContentClick += dataGridViewDoctorListListMedecine_CellContentClick;
+            // 
+            // FormDoctor
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 450);
+            Controls.Add(dataGridViewDoctorListListMedecine);
+            Name = "FormDoctor";
+            Text = "FormDoctor";
+            Load += FormDoctor_Load;
+            ((System.ComponentModel.ISupportInitialize)dataGridViewDoctorListListMedecine).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private DataGridView dataGridViewDoctorListListMedecine;
     }
 }

@@ -17,8 +17,20 @@ namespace GSB_C_.Forms
         {
             InitializeComponent();
             MedicineDAO medDAO = new MedicineDAO();
-            List<Medicine> medlist= medDAO.GetAll();
-            MessageBox.Show(medlist.ElementAt(0).Molecule);
+            List<Medicine> medlist = medDAO.GetAll();
+
+            this.dataGridViewDoctorListListMedecine.DataSource = medlist;
+
+        }
+
+        private void FormDoctor_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridViewDoctorListListMedecine_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
