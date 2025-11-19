@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using GSB_C_.Models;
-
 namespace GSB_C_.Forms
 {
     public partial class FormDoctor : Form
@@ -32,5 +31,23 @@ namespace GSB_C_.Forms
         {
 
         }
+
+        private void FormDoctor_DoubleClick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridViewDoctorListListMedecine_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            MedicineDAO medDAO = new MedicineDAO();
+            List<Medicine> medlist = medDAO.GetAll();
+
+            FormDetailMedecine formDetailMedicine = new FormDetailMedecine();
+            formDetailMedicine.dataGridViewDetailMedicine.DataSource = medlist;
+            formDetailMedicine.Show();
+
+        }
     }
 }
+
+

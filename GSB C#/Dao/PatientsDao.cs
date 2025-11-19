@@ -29,11 +29,10 @@ public class PatientsDAO
                         int userId = myReader.GetInt32("id_users");
                         string name = myReader.GetString("name");
                         string firstname = myReader.GetString("firstname");
-                        string lastname = myReader.GetString("lastname");
                         int age = myReader.GetInt32("age");
                         bool gender = myReader.GetBoolean("gender");
 
-                        Patients patient = new Patients(patientId, userId, name, firstname, lastname, age, gender);
+                        Patients patient = new Patients(patientId, userId, name, firstname, age, gender);
                         patients.Add(patient);
                     }
                 }
@@ -69,11 +68,10 @@ public class PatientsDAO
                         int userId = myReader.GetInt32("id_users");
                         string name = myReader.GetString("name");
                         string firstname = myReader.GetString("firstname");
-                        string lastname = myReader.GetString("lastname");
                         int age = myReader.GetInt32("age");
                         bool gender = myReader.GetBoolean("gender");
 
-                        return new Patients(patientId, userId, name, firstname, lastname, age, gender);
+                        return new Patients(patientId, userId, name, firstname,age, gender);
                     }
                     else
                     {
@@ -111,11 +109,10 @@ public class PatientsDAO
                         int patientId = myReader.GetInt32("id_patients");
                         string name = myReader.GetString("name");
                         string firstname = myReader.GetString("firstname");
-                        string lastname = myReader.GetString("lastname");
                         int age = myReader.GetInt32("age");
                         bool gender = myReader.GetBoolean("gender");
 
-                        Patients patient = new Patients(patientId, userId, name, firstname, lastname, age, gender);
+                        Patients patient = new Patients(patientId, userId, name, firstname, age, gender);
                         patients.Add(patient);
                     }
                 }
@@ -141,12 +138,11 @@ public class PatientsDAO
 
                 MySqlCommand myCommand = new MySqlCommand();
                 myCommand.Connection = connection;
-                myCommand.CommandText = @"INSERT INTO Patients (id_users, name, firstname, lastname, age, gender) 
+                myCommand.CommandText = @"INSERT INTO Patients (id_users, name, firstname, age, gender) 
                                          VALUES (@userId, @name, @firstname, @lastname, @age, @gender);";
                 myCommand.Parameters.AddWithValue("@userId", patient.UserId);
                 myCommand.Parameters.AddWithValue("@name", patient.Name);
                 myCommand.Parameters.AddWithValue("@firstname", patient.Firstname);
-                myCommand.Parameters.AddWithValue("@lastname", patient.Lastname);
                 myCommand.Parameters.AddWithValue("@age", patient.Age);
                 myCommand.Parameters.AddWithValue("@gender", patient.Gender);
 
@@ -174,13 +170,12 @@ public class PatientsDAO
                 MySqlCommand myCommand = new MySqlCommand();
                 myCommand.Connection = connection;
                 myCommand.CommandText = @"UPDATE Patients SET id_users = @userId, name = @name, 
-                                         firstname = @firstname, lastname = @lastname, age = @age, gender = @gender 
+                                         firstname = @firstname, age = @age, gender = @gender 
                                          WHERE patient_id = @patientId;";
                 myCommand.Parameters.AddWithValue("@patientId", patient.PatientID);
                 myCommand.Parameters.AddWithValue("@userId", patient.UserId);
                 myCommand.Parameters.AddWithValue("@name", patient.Name);
                 myCommand.Parameters.AddWithValue("@firstname", patient.Firstname);
-                myCommand.Parameters.AddWithValue("@lastname", patient.Lastname);
                 myCommand.Parameters.AddWithValue("@age", patient.Age);
                 myCommand.Parameters.AddWithValue("@gender", patient.Gender);
 

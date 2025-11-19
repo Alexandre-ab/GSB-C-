@@ -35,12 +35,13 @@
             // dataGridViewDoctorListListMedecine
             // 
             dataGridViewDoctorListListMedecine.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewDoctorListListMedecine.Location = new Point(86, 48);
+            dataGridViewDoctorListListMedecine.Location = new Point(314, 53);
             dataGridViewDoctorListListMedecine.Name = "dataGridViewDoctorListListMedecine";
             dataGridViewDoctorListListMedecine.RowHeadersWidth = 51;
-            dataGridViewDoctorListListMedecine.Size = new Size(624, 344);
+            dataGridViewDoctorListListMedecine.Size = new Size(442, 329);
             dataGridViewDoctorListListMedecine.TabIndex = 0;
             dataGridViewDoctorListListMedecine.CellContentClick += dataGridViewDoctorListListMedecine_CellContentClick;
+            dataGridViewDoctorListListMedecine.CellContentDoubleClick += dataGridViewDoctorListListMedecine_CellContentDoubleClick;
             // 
             // FormDoctor
             // 
@@ -51,6 +52,7 @@
             Name = "FormDoctor";
             Text = "FormDoctor";
             Load += FormDoctor_Load;
+            DoubleClick += FormDoctor_DoubleClick;
             ((System.ComponentModel.ISupportInitialize)dataGridViewDoctorListListMedecine).EndInit();
             ResumeLayout(false);
         }

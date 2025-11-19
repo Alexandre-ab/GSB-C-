@@ -34,14 +34,15 @@
             textBoxLoginPassword = new TextBox();
             textBoxLoginEmail = new TextBox();
             pictureBox1 = new PictureBox();
+            buttonCreationCompte = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // button1
             // 
-            button1.Location = new Point(119, 357);
+            button1.Location = new Point(130, 357);
             button1.Name = "button1";
-            button1.Size = new Size(112, 56);
+            button1.Size = new Size(88, 43);
             button1.TabIndex = 0;
             button1.Text = "Login";
             button1.UseVisualStyleBackColor = true;
@@ -78,10 +79,21 @@
             pictureBox1.TabStop = false;
             pictureBox1.Click += pictureBox1_Click;
             // 
+            // buttonCreationCompte
+            // 
+            buttonCreationCompte.Location = new Point(107, 406);
+            buttonCreationCompte.Name = "buttonCreationCompte";
+            buttonCreationCompte.Size = new Size(139, 44);
+            buttonCreationCompte.TabIndex = 4;
+            buttonCreationCompte.Text = "Créer un compte";
+            buttonCreationCompte.UseVisualStyleBackColor = true;
+            buttonCreationCompte.Click += buttonCreationCompte_Click;
+            // 
             // Form1
             // 
             BackColor = Color.Azure;
             ClientSize = new Size(341, 474);
+            Controls.Add(buttonCreationCompte);
             Controls.Add(textBoxLoginEmail);
             Controls.Add(textBoxLoginPassword);
             Controls.Add(button1);
@@ -100,5 +112,6 @@
         private TextBox textBoxLoginPassword;
         protected internal TextBox textBoxLoginEmail;
         private PictureBox pictureBox1;
+        private Button buttonCreationCompte;
     }
 }

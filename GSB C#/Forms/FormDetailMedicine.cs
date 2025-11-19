@@ -11,18 +11,18 @@ using GSB_C_.Models;
 
 namespace GSB_C_.Forms
 {
-    public partial class FormAdmin : Form
+    public partial class FormDetailMedecine : Form
     {
-        public FormAdmin()
+        public FormDetailMedecine()
         {
             InitializeComponent();
-            PatientsDAO patDAO = new PatientsDAO();
-            List<Patients> patlist = patDAO.GetAll();
+            MedicineDAO medDAO = new MedicineDAO();
+            List<Medicine> medlist = medDAO.GetAll();
 
-            this.dataGridViewAdmin.DataSource = patlist;    
+            this.dataGridViewDetailMedicine.DataSource = medlist;
         }
 
-        private void dataGridViewAdmin_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void FormDetailMedecine_Load(object sender, EventArgs e)
         {
 
         }

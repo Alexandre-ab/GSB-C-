@@ -61,6 +61,13 @@ public partial class Form1 : Form
 
     }
 
+    private void buttonCreationCompte_Click(object sender, EventArgs e)
+    {
+        this.Hide();
+        FormCreationDeCompte formCreationCompte = new FormCreationDeCompte();
+        formCreationCompte.ShowDialog();
+    }
+
     private void pictureBox1_Click(object sender, EventArgs e)
     {
 

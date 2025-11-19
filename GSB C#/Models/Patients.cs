@@ -16,8 +16,6 @@ namespace GSB_C_.Models
         public string? Firstname { get; set; }
 
 
-        public string? Lastname { get; set; }
-
         public int Age { get; set; }
 
 
@@ -26,14 +24,13 @@ namespace GSB_C_.Models
 
         public Patients() { }
 
-        public Patients(int patient, int user, string name, string firstname, string lastname, int age, bool gender) {
+        public Patients(int patient, int user, string name, string firstname, int age, bool gender) {
 
 
             this.PatientID = patient;
             this.UserId = user;
             this.Name = name;
             this.Firstname = firstname;
-            this.Lastname = lastname;
             this.Age = age;
             this.Gender = gender;
 
