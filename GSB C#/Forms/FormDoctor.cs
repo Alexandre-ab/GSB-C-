@@ -47,6 +47,25 @@ namespace GSB_C_.Forms
             formDetailMedicine.Show();
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            FormPrescription formPrescription = new FormPrescription();
+            formPrescription.ShowDialog();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Deconnexion_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Form1 form1 = new Form1();
+            form1.ShowDialog();
+        }
     }
 }
 

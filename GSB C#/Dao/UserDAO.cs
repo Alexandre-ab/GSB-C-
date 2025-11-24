@@ -17,10 +17,11 @@ public class UserDAO
 
         using (var connection = db.GetConnection())
         {
-            try { 
+            try
+            {
 
-             
-            connection.Open();
+
+                connection.Open();
 
                 // create a MySQL command and set the SQL statement with parameters
                 MySqlCommand myCommand = new MySqlCommand();
@@ -35,7 +36,7 @@ public class UserDAO
                 {
                     if (myReader.Read())
                     {
-                        id = myReader.GetInt32("id_users" );
+                        id = myReader.GetInt32("id_users");
                         name = myReader.GetString("name");
                         firstname = myReader.GetString("firstname");
                         role = myReader.GetBoolean("role");
@@ -62,8 +63,34 @@ public class UserDAO
             }
         }
     }
+    public bool Add(User user)
+    {
+        using (var connection = db.GetConnection())
+        {
+            try
+            {
+                connection.Open();
+                MySqlCommand myCommand = new MySqlCommand();
+                myCommand.Connection = connection;
+                myCommand.CommandText = @"INSERT INTO Users (id_users, name, firstname, email, password, role) 
+                                          VALUES (@name, @firstname, @email, SHA2(@password, 256), false)";
+                myCommand.Parameters.AddWithValue("@id_users", user.UserId);
+                myCommand.Parameters.AddWithValue("@name", user.Name);
+                myCommand.Parameters.AddWithValue("@firstname", user.Firstname);
+                myCommand.Parameters.AddWithValue("@email", user.Email);
+                myCommand.Parameters.AddWithValue("@password", user.Password);
+                int rowsAffected = myCommand.ExecuteNonQuery();
+                connection.Close();
+                return rowsAffected > 0;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error registering user: " + ex.Message);
+            }
+        }
 
     }
+}
 
 
         

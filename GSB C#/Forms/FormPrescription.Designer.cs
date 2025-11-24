@@ -1,6 +1,6 @@
 ﻿namespace GSB_C_.Forms
 {
-    partial class FormCreationDeCompte
+    partial class FormPrescription
     {
         /// <summary>
         /// Required designer variable.
@@ -30,13 +30,14 @@
         {
             SuspendLayout();
             // 
-            // FormCreationDeCompte
+            // FormPrescription
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Name = "FormCreationDeCompte";
-            Text = "FormCreationDeCompte";
+            Name = "FormPrescription";
+            Text = "FormPrescription";
+            Load += FormPrescription_Load;
             ResumeLayout(false);
         }
 
