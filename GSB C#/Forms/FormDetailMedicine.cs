@@ -26,5 +26,10 @@ namespace GSB_C_.Forms
         {
 
         }
+
+        private void dataGridViewDetailMedicine_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

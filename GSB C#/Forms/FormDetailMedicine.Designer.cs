@@ -40,6 +40,7 @@
             dataGridViewDetailMedicine.RowHeadersWidth = 51;
             dataGridViewDetailMedicine.Size = new Size(686, 326);
             dataGridViewDetailMedicine.TabIndex = 0;
+            dataGridViewDetailMedicine.CellContentClick += dataGridViewDetailMedicine_CellContentClick;
             // 
             // FormDetailMedecine
             // 

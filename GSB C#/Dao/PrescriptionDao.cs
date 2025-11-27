@@ -29,7 +29,7 @@ public class PrescriptionDAO
                         int patientId = myReader.GetInt32("id_patients");
                         int userId = myReader.GetInt32("id_users");
                         int quantity = myReader.GetInt32("quantity");
-                        bool validity = myReader.GetBoolean("validity");
+                        DateTime validity = myReader.GetDateTime("validity");
 
                         Prescription prescription = new Prescription(prescriptionId, patientId, userId, quantity, validity);
                         prescriptions.Add(prescription);
@@ -67,7 +67,7 @@ public class PrescriptionDAO
                         int patientId = myReader.GetInt32("id_patients");
                         int userId = myReader.GetInt32("users_id");
                         int quantity = myReader.GetInt32("quantity");
-                        bool validity = myReader.GetBoolean("validity");
+                        DateTime validity = myReader.GetDateTime("validity");
 
                         return new Prescription(prescriptionId, patientId, userId, quantity, validity);
                     }
@@ -107,7 +107,7 @@ public class PrescriptionDAO
                         int prescriptionId = myReader.GetInt32("id_prescription");
                         int userId = myReader.GetInt32("id_users");
                         int quantity = myReader.GetInt32("quantity");
-                        bool validity = myReader.GetBoolean("validity");
+                        DateTime validity = myReader.GetDateTime("validity");
 
                         Prescription prescription = new Prescription(prescriptionId, patientId, userId, quantity, validity);
                         prescriptions.Add(prescription);
@@ -147,7 +147,7 @@ public class PrescriptionDAO
                         int prescriptionId = myReader.GetInt32("id_prescription");
                         int patientId = myReader.GetInt32("id_patients");
                         int quantity = myReader.GetInt32("quantity");
-                        bool validity = myReader.GetBoolean("validity");
+                        DateTime validity = myReader.GetDateTime("validity");
 
                         Prescription prescription = new Prescription(prescriptionId, patientId, userId, quantity, validity);
                         prescriptions.Add(prescription);
@@ -207,7 +207,7 @@ public class PrescriptionDAO
                 myCommand.Connection = connection;
                 myCommand.CommandText = @"UPDATE Prescription SET id_patients = @patientId, id_users = @userId, 
                                          quantity = @quantity, validity = @validity 
-                                         WHERE prescription_id = @prescriptionId;";
+                                         WHERE id_prescription = @prescriptionId;";
                 myCommand.Parameters.AddWithValue("@prescriptionId", prescription.prescriptionId);
                 myCommand.Parameters.AddWithValue("@patientId", prescription.patientId);
                 myCommand.Parameters.AddWithValue("@userId", prescription.UserId);
