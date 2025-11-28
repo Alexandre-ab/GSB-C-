@@ -17,8 +17,8 @@ namespace GSB_C_.Forms
         public FormAdmin()
         {
             InitializeComponent();
-            PatientsDAO patDAO = new PatientsDAO();
-            List<Patients> patlist = patDAO.GetAll();
+            UserDAO userDAO = new UserDAO();
+            List<User> patlist = userDAO.GetAll();
 
             this.dataGridViewAdmin.DataSource = patlist;
         }

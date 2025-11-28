@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,12 +26,14 @@ namespace GSB_C_.Models
         public User() { }
         //ceci est une surcharge du constructeur, elle permettra la création d'objet User
         //qui sera instancié avec les variables passées en parametres
-     
-        public User(int id, string name, string firstname, bool role)
+
+        public User(int id, string name, string firstname,string email ,string password ,bool role)
         {
             this.UserId = id;
            this.Name = name;
-            Firstname = firstname;
+            this.Email = email;
+            this.Firstname = firstname;
+           this.Password = password;
             this.Role = role;
 
         }
