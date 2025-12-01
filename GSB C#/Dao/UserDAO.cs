@@ -76,7 +76,7 @@ using System.Security.Cryptography;
                 MySqlCommand myCommand = new MySqlCommand();
                 myCommand.Connection = connection;
                 myCommand.CommandText = @"INSERT INTO Users (name, firstname, email, password, role) 
-                                          VALUES (@name, @firstname, @email, SHA2(@password, 256), role)";
+                                          VALUES (@name, @firstname, @email, SHA2(@password, 256), @role)";
                 myCommand.Parameters.AddWithValue("@name", user.Name);
                 myCommand.Parameters.AddWithValue("@firstname", user.Firstname);
                 myCommand.Parameters.AddWithValue("@email", user.Email);

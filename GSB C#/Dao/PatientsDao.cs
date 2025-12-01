@@ -138,9 +138,9 @@ public class PatientsDAO
 
                 MySqlCommand myCommand = new MySqlCommand();
                 myCommand.Connection = connection;
-                myCommand.CommandText = @"INSERT INTO Patients (id_users, name, firstname, age, gender) 
-                                         VALUES (@userId, @name, @firstname, @lastname, @age, @gender);";
-                myCommand.Parameters.AddWithValue("@userId", patient.UserId);
+                myCommand.CommandText = @"INSERT INTO Patients ( id_users,name, firstname, age, gender) 
+                                         VALUES ( @userID, @name, @firstname, @age, @gender);";
+                myCommand.Parameters.AddWithValue("@userID", patient.UserId);
                 myCommand.Parameters.AddWithValue("@name", patient.Name);
                 myCommand.Parameters.AddWithValue("@firstname", patient.Firstname);
                 myCommand.Parameters.AddWithValue("@age", patient.Age);

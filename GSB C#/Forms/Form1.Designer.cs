@@ -56,16 +56,16 @@
             textBoxLoginPassword.Size = new Size(186, 27);
             textBoxLoginPassword.TabIndex = 1;
             textBoxLoginPassword.UseSystemPasswordChar = true;
-            textBoxLoginPassword.TextChanged += textBoxLoginPassword_TextChanged;
+       
             // 
             // textBoxLoginEmail
             // 
-            textBoxLoginEmail.Location = new Point(84, 125);
+            textBoxLoginEmail.Location = new Point(84, 121);
             textBoxLoginEmail.Name = "textBoxLoginEmail";
             textBoxLoginEmail.PlaceholderText = "Email";
             textBoxLoginEmail.Size = new Size(186, 27);
             textBoxLoginEmail.TabIndex = 2;
-            textBoxLoginEmail.TextChanged += textBox2_TextChanged;
+            
             // 
             // pictureBox1
             // 
@@ -77,7 +77,8 @@
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 3;
             pictureBox1.TabStop = false;
-            pictureBox1.Click += pictureBox1_Click;
+          
+          
             // 
             // buttonCreationCompte
             // 
@@ -99,7 +100,6 @@
             Controls.Add(button1);
             Controls.Add(pictureBox1);
             Name = "Form1";
-            Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();

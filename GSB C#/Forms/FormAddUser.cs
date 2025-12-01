@@ -16,38 +16,16 @@ namespace GSB_C_.Forms
         public FormAddUser()
         {
             InitializeComponent();
-            MessageBox.Show("Bienvenue sur la page de création de compte.");
         }
-
-        private void label1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e) // ajout user
         {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label12_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            int roleIndex = comboBoxroleUser.SelectedIndex; // Récupérer l'index sélectionné dans le ComboBox
-
-
             string name = textBoxnameUser.Text;
             string firstname = textBoxfirstnameUser.Text;
             string email = textBoxemailUser.Text;
             string password = textBoxpasswordUser.Text;
-            int role = comboBoxroleUser.SelectedIndex;
-            bool isAdmin = (roleIndex == 1); // bien respecter le sens des rôles dans le combobox, 0 = utilisateur, 1 = administrateur
+            bool role = checkBoxadminUser.Checked;
 
-
-            User newUser = new User(0, name, firstname, email, password, role == 1);
+            User newUser = new User(0, name, firstname, email, password, role);
             UserDAO userDAO = new UserDAO();
             bool success = userDAO.Add(newUser);
             if (success)
@@ -60,23 +38,31 @@ namespace GSB_C_.Forms
                 MessageBox.Show("Échec de l'ajout de l'utilisateur.");
             }
 
-
-
         }
-
-        private void comboBoxroleUser_SelectedIndexChanged(object sender, EventArgs e)
+        private void buttonaddPatient_Click(object sender, EventArgs e) // ajout patient
         {
+            int selectIndex = comboBoxGender.SelectedIndex;
+            int idUserConnect = UserSession.CurrentUser.UserId;
 
-        }
+            string name = textBoxnamePatient.Text;
+            string firstname = textBoxfirstnamePatient.Text;
+            int age = int.Parse(textBoxagePatient.Text);
+            int gender = comboBoxGender.SelectedIndex;
 
-        private void FormAddUser_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label9_Click(object sender, EventArgs e)
-        {
-
+            bool isMale = (selectIndex == 1); // bien respecter le sens des rôles dans le combobox, 0 = féminin, 1 = masculin
+            
+            Patients newPatient = new Patients(0, idUserConnect, name, firstname, age, isMale);
+            PatientsDAO patientDAO = new PatientsDAO();
+            bool success = patientDAO.Add(newPatient);
+            if (success)
+            {
+                MessageBox.Show("Patient ajouté avec succès !");
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Échec de l'ajout du patient.");
+            }
         }
     }
 }

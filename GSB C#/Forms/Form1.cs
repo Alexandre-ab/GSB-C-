@@ -13,28 +13,6 @@ public partial class Form1 : Form
         InitializeComponent();
     }
 
-
-
-    private void label1_Click(object sender, EventArgs e)
-    {
-
-    }
-
-    private void textBox2_TextChanged(object sender, EventArgs e)
-    {
-
-    }
-
-    private void Form1_Load(object sender, EventArgs e)
-    {
-
-    }
-
-    private void textBoxLoginPassword_TextChanged(object sender, EventArgs e)
-    {
-
-    }
-
     private void button1_Click(object sender, EventArgs e)
     {
         UserDAO userDao = new UserDAO();
@@ -42,17 +20,20 @@ public partial class Form1 : Form
         if (user != null && user.Role == true)
 
         {
+            UserSession.CurrentUser = user;
             this.Hide();
             FormAdmin formAdmin = new FormAdmin();
-            formAdmin.ShowDialog();
             MessageBox.Show("Login successful! Welcome " + user);
+            formAdmin.ShowDialog();
+           
         }
         else if (user != null && user.Role == false)
         {
+            UserSession.CurrentUser = user;
             this.Hide();
             FormDoctor formUser = new FormDoctor();
-            formUser.ShowDialog();
             MessageBox.Show("Login successful! Welcome " + user);
+            formUser.ShowDialog();
         }
         else
         {
@@ -66,10 +47,5 @@ public partial class Form1 : Form
         this.Hide();
         FormAddUser formCreationCompte = new FormAddUser();
         formCreationCompte.ShowDialog();
-    }
-
-    private void pictureBox1_Click(object sender, EventArgs e)
-    {
-
     }
 }
