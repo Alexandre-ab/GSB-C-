@@ -5,7 +5,10 @@ using GSB2.DAO;
 using MySql.Data.MySqlClient;
 using System.Security.Cryptography;
 
-public class UserDAO
+
+
+
+    public class UserDAO
 {
     private readonly Database db = new Database();
     public User Login(string email, string password)
@@ -72,13 +75,13 @@ public class UserDAO
                 connection.Open();
                 MySqlCommand myCommand = new MySqlCommand();
                 myCommand.Connection = connection;
-                myCommand.CommandText = @"INSERT INTO Users (id_users, name, firstname, email, password, role) 
-                                          VALUES (@name, @firstname, @email, SHA2(@password, 256), false)";
-                myCommand.Parameters.AddWithValue("@id_users", user.UserId);
+                myCommand.CommandText = @"INSERT INTO Users (name, firstname, email, password, role) 
+                                          VALUES (@name, @firstname, @email, SHA2(@password, 256), role)";
                 myCommand.Parameters.AddWithValue("@name", user.Name);
                 myCommand.Parameters.AddWithValue("@firstname", user.Firstname);
                 myCommand.Parameters.AddWithValue("@email", user.Email);
-                myCommand.Parameters.AddWithValue("@password", user.Password);
+                myCommand.Parameters.AddWithValue("@password", user.Password);   
+                myCommand.Parameters.AddWithValue("@role", user.Role );
                 int rowsAffected = myCommand.ExecuteNonQuery();
                 connection.Close();
                 return rowsAffected > 0;
@@ -130,7 +133,7 @@ public class UserDAO
 
     }
 
-
+    // modifier un utilisateur
     public bool update (User user)
     {
         using (var connection = db.GetConnection())
@@ -157,7 +160,7 @@ public class UserDAO
             }
         }
     }
-
+    // Supprimer un utilisateur 
     public bool Delete(int userId)
     {
         using (var connection = db.GetConnection())

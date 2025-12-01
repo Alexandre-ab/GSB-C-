@@ -28,11 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            textBox3 = new TextBox();
-            textBox4 = new TextBox();
-            textBox5 = new TextBox();
+            textBoxnameUser = new TextBox();
+            textBoxfirstnameUser = new TextBox();
+            textBoxemailUser = new TextBox();
+            textBoxpasswordUser = new TextBox();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
@@ -40,62 +39,59 @@
             label5 = new Label();
             label6 = new Label();
             label7 = new Label();
-            textBox6 = new TextBox();
-            textBox7 = new TextBox();
-            textBox8 = new TextBox();
-            textBox9 = new TextBox();
-            textBox10 = new TextBox();
-            label8 = new Label();
+            textBoxagePatient = new TextBox();
+            textBoxnamePatient = new TextBox();
+            textBoxgenderPatient = new TextBox();
+            textBoxfirstnamePatient = new TextBox();
             label9 = new Label();
             label10 = new Label();
             label11 = new Label();
             label12 = new Label();
             label13 = new Label();
-            button1 = new Button();
-            button2 = new Button();
+            buttonaddUser = new Button();
+            buttonaddPatient = new Button();
+            mySqlCommand1 = new MySql.Data.MySqlClient.MySqlCommand();
+            comboBoxroleUser = new ComboBox();
             SuspendLayout();
             // 
-            // textBox1
+            // textBoxnameUser
             // 
-            textBox1.Location = new Point(35, 113);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(125, 27);
-            textBox1.TabIndex = 0;
+            textBoxnameUser.Location = new Point(31, 85);
+            textBoxnameUser.Margin = new Padding(3, 2, 3, 2);
+            textBoxnameUser.Name = "textBoxnameUser";
+            textBoxnameUser.Size = new Size(110, 23);
+            textBoxnameUser.TabIndex = 0;
             // 
-            // textBox2
+            // textBoxfirstnameUser
             // 
-            textBox2.Location = new Point(35, 176);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(125, 27);
-            textBox2.TabIndex = 1;
+            textBoxfirstnameUser.Location = new Point(31, 132);
+            textBoxfirstnameUser.Margin = new Padding(3, 2, 3, 2);
+            textBoxfirstnameUser.Name = "textBoxfirstnameUser";
+            textBoxfirstnameUser.Size = new Size(110, 23);
+            textBoxfirstnameUser.TabIndex = 1;
             // 
-            // textBox3
+            // textBoxemailUser
             // 
-            textBox3.Location = new Point(35, 246);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(125, 27);
-            textBox3.TabIndex = 2;
+            textBoxemailUser.Location = new Point(31, 184);
+            textBoxemailUser.Margin = new Padding(3, 2, 3, 2);
+            textBoxemailUser.Name = "textBoxemailUser";
+            textBoxemailUser.Size = new Size(110, 23);
+            textBoxemailUser.TabIndex = 2;
             // 
-            // textBox4
+            // textBoxpasswordUser
             // 
-            textBox4.Location = new Point(250, 113);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(125, 27);
-            textBox4.TabIndex = 3;
-            // 
-            // textBox5
-            // 
-            textBox5.Location = new Point(250, 173);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(125, 27);
-            textBox5.TabIndex = 4;
+            textBoxpasswordUser.Location = new Point(219, 85);
+            textBoxpasswordUser.Margin = new Padding(3, 2, 3, 2);
+            textBoxpasswordUser.Name = "textBoxpasswordUser";
+            textBoxpasswordUser.Size = new Size(110, 23);
+            textBoxpasswordUser.TabIndex = 3;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(35, 80);
+            label1.Location = new Point(31, 60);
             label1.Name = "label1";
-            label1.Size = new Size(49, 20);
+            label1.Size = new Size(39, 15);
             label1.TabIndex = 5;
             label1.Text = "Name";
             label1.Click += label1_Click;
@@ -103,9 +99,9 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(35, 153);
+            label2.Location = new Point(31, 115);
             label2.Name = "label2";
-            label2.Size = new Size(73, 20);
+            label2.Size = new Size(59, 15);
             label2.TabIndex = 6;
             label2.Text = "Firstname";
             label2.Click += label2_Click;
@@ -113,27 +109,27 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(35, 223);
+            label3.Location = new Point(31, 167);
             label3.Name = "label3";
-            label3.Size = new Size(46, 20);
+            label3.Size = new Size(36, 15);
             label3.TabIndex = 7;
             label3.Text = "Email";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(250, 80);
+            label4.Location = new Point(219, 60);
             label4.Name = "label4";
-            label4.Size = new Size(70, 20);
+            label4.Size = new Size(57, 15);
             label4.TabIndex = 8;
             label4.Text = "Password";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(250, 153);
+            label5.Location = new Point(219, 115);
             label5.Name = "label5";
-            label5.Size = new Size(43, 20);
+            label5.Size = new Size(33, 15);
             label5.TabIndex = 9;
             label5.Text = "Rôle ";
             // 
@@ -141,9 +137,9 @@
             // 
             label6.AutoSize = true;
             label6.BackColor = Color.Chocolate;
-            label6.Location = new Point(157, 50);
+            label6.Location = new Point(137, 38);
             label6.Name = "label6";
-            label6.Size = new Size(44, 20);
+            label6.Size = new Size(34, 15);
             label6.TabIndex = 10;
             label6.Text = "USER";
             // 
@@ -151,89 +147,78 @@
             // 
             label7.AutoSize = true;
             label7.BackColor = Color.Gold;
-            label7.Location = new Point(616, 50);
+            label7.Location = new Point(539, 38);
             label7.Name = "label7";
-            label7.Size = new Size(64, 20);
+            label7.Size = new Size(52, 15);
             label7.TabIndex = 11;
             label7.Text = "PATIENT";
             // 
-            // textBox6
+            // textBoxagePatient
             // 
-            textBox6.Location = new Point(513, 133);
-            textBox6.Name = "textBox6";
-            textBox6.Size = new Size(118, 27);
-            textBox6.TabIndex = 12;
+            textBoxagePatient.Location = new Point(586, 100);
+            textBoxagePatient.Margin = new Padding(3, 2, 3, 2);
+            textBoxagePatient.Name = "textBoxagePatient";
+            textBoxagePatient.Size = new Size(104, 23);
+            textBoxagePatient.TabIndex = 13;
             // 
-            // textBox7
+            // textBoxnamePatient
             // 
-            textBox7.Location = new Point(670, 133);
-            textBox7.Name = "textBox7";
-            textBox7.Size = new Size(118, 27);
-            textBox7.TabIndex = 13;
+            textBoxnamePatient.Location = new Point(449, 100);
+            textBoxnamePatient.Margin = new Padding(3, 2, 3, 2);
+            textBoxnamePatient.Name = "textBoxnamePatient";
+            textBoxnamePatient.Size = new Size(104, 23);
+            textBoxnamePatient.TabIndex = 14;
             // 
-            // textBox8
+            // textBoxgenderPatient
             // 
-            textBox8.Location = new Point(513, 206);
-            textBox8.Name = "textBox8";
-            textBox8.Size = new Size(118, 27);
-            textBox8.TabIndex = 14;
+            textBoxgenderPatient.Location = new Point(586, 154);
+            textBoxgenderPatient.Margin = new Padding(3, 2, 3, 2);
+            textBoxgenderPatient.Name = "textBoxgenderPatient";
+            textBoxgenderPatient.Size = new Size(104, 23);
+            textBoxgenderPatient.TabIndex = 15;
             // 
-            // textBox9
+            // textBoxfirstnamePatient
             // 
-            textBox9.Location = new Point(670, 206);
-            textBox9.Name = "textBox9";
-            textBox9.Size = new Size(118, 27);
-            textBox9.TabIndex = 15;
-            // 
-            // textBox10
-            // 
-            textBox10.Location = new Point(513, 269);
-            textBox10.Name = "textBox10";
-            textBox10.Size = new Size(118, 27);
-            textBox10.TabIndex = 16;
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Location = new Point(513, 94);
-            label8.Name = "label8";
-            label8.Size = new Size(22, 20);
-            label8.TabIndex = 18;
-            label8.Text = "Id";
+            textBoxfirstnamePatient.Location = new Point(449, 154);
+            textBoxfirstnamePatient.Margin = new Padding(3, 2, 3, 2);
+            textBoxfirstnamePatient.Name = "textBoxfirstnamePatient";
+            textBoxfirstnamePatient.Size = new Size(104, 23);
+            textBoxfirstnamePatient.TabIndex = 16;
             // 
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(513, 176);
+            label9.Location = new Point(449, 70);
             label9.Name = "label9";
-            label9.Size = new Size(49, 20);
+            label9.Size = new Size(39, 15);
             label9.TabIndex = 19;
             label9.Text = "Name";
+            label9.Click += label9_Click;
             // 
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(513, 246);
+            label10.Location = new Point(449, 135);
             label10.Name = "label10";
-            label10.Size = new Size(73, 20);
+            label10.Size = new Size(59, 15);
             label10.TabIndex = 20;
             label10.Text = "Firstname";
             // 
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new Point(680, 94);
+            label11.Location = new Point(595, 70);
             label11.Name = "label11";
-            label11.Size = new Size(36, 20);
+            label11.Size = new Size(28, 15);
             label11.TabIndex = 21;
             label11.Text = "Age";
             // 
             // label12
             // 
             label12.AutoSize = true;
-            label12.Location = new Point(670, 176);
+            label12.Location = new Point(586, 132);
             label12.Name = "label12";
-            label12.Size = new Size(57, 20);
+            label12.Size = new Size(45, 15);
             label12.TabIndex = 22;
             label12.Text = "Gender";
             label12.Click += label12_Click;
@@ -241,49 +226,68 @@
             // label13
             // 
             label13.AutoSize = true;
-            label13.Location = new Point(670, 236);
+            label13.Location = new Point(586, 177);
             label13.Name = "label13";
-            label13.Size = new Size(0, 20);
+            label13.Size = new Size(0, 15);
             label13.TabIndex = 23;
             // 
-            // button1
+            // buttonaddUser
             // 
-            button1.BackColor = Color.Chocolate;
-            button1.Location = new Point(157, 347);
-            button1.Name = "button1";
-            button1.Size = new Size(124, 57);
-            button1.TabIndex = 24;
-            button1.Text = "Add";
-            button1.UseVisualStyleBackColor = false;
+            buttonaddUser.BackColor = Color.Chocolate;
+            buttonaddUser.Location = new Point(137, 260);
+            buttonaddUser.Margin = new Padding(3, 2, 3, 2);
+            buttonaddUser.Name = "buttonaddUser";
+            buttonaddUser.Size = new Size(108, 43);
+            buttonaddUser.TabIndex = 24;
+            buttonaddUser.Text = " Add";
+            buttonaddUser.UseVisualStyleBackColor = false;
+            buttonaddUser.Click += button1_Click;
             // 
-            // button2
+            // buttonaddPatient
             // 
-            button2.BackColor = Color.Gold;
-            button2.Location = new Point(603, 347);
-            button2.Name = "button2";
-            button2.Size = new Size(113, 57);
-            button2.TabIndex = 25;
-            button2.Text = "Add";
-            button2.UseVisualStyleBackColor = false;
+            buttonaddPatient.BackColor = Color.Gold;
+            buttonaddPatient.Location = new Point(528, 260);
+            buttonaddPatient.Margin = new Padding(3, 2, 3, 2);
+            buttonaddPatient.Name = "buttonaddPatient";
+            buttonaddPatient.Size = new Size(99, 43);
+            buttonaddPatient.TabIndex = 25;
+            buttonaddPatient.Text = "Add";
+            buttonaddPatient.UseVisualStyleBackColor = false;
+            // 
+            // mySqlCommand1
+            // 
+            mySqlCommand1.CacheAge = 0;
+            mySqlCommand1.Connection = null;
+            mySqlCommand1.EnableCaching = false;
+            mySqlCommand1.Transaction = null;
+            // 
+            // comboBoxroleUser
+            // 
+            comboBoxroleUser.FormattingEnabled = true;
+            comboBoxroleUser.Items.AddRange(new object[] { "Utilisateur", "Administrateur" });
+            comboBoxroleUser.Location = new Point(220, 132);
+            comboBoxroleUser.Name = "comboBoxroleUser";
+            comboBoxroleUser.Size = new Size(105, 23);
+            comboBoxroleUser.TabIndex = 28;
+            comboBoxroleUser.SelectedIndexChanged += comboBoxroleUser_SelectedIndexChanged;
             // 
             // FormAddUser
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            ClientSize = new Size(700, 338);
+            Controls.Add(comboBoxroleUser);
+            Controls.Add(buttonaddPatient);
+            Controls.Add(buttonaddUser);
             Controls.Add(label13);
             Controls.Add(label12);
             Controls.Add(label11);
             Controls.Add(label10);
             Controls.Add(label9);
-            Controls.Add(label8);
-            Controls.Add(textBox10);
-            Controls.Add(textBox9);
-            Controls.Add(textBox8);
-            Controls.Add(textBox7);
-            Controls.Add(textBox6);
+            Controls.Add(textBoxfirstnamePatient);
+            Controls.Add(textBoxgenderPatient);
+            Controls.Add(textBoxnamePatient);
+            Controls.Add(textBoxagePatient);
             Controls.Add(label7);
             Controls.Add(label6);
             Controls.Add(label5);
@@ -291,23 +295,23 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(textBox5);
-            Controls.Add(textBox4);
-            Controls.Add(textBox3);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
+            Controls.Add(textBoxpasswordUser);
+            Controls.Add(textBoxemailUser);
+            Controls.Add(textBoxfirstnameUser);
+            Controls.Add(textBoxnameUser);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "FormAddUser";
+            Load += FormAddUser_Load;
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private TextBox textBox1;
-        private TextBox textBox2;
-        private TextBox textBox3;
-        private TextBox textBox4;
-        private TextBox textBox5;
+        private TextBox textBoxnameUser;
+        private TextBox textBoxfirstnameUser;
+        private TextBox textBoxemailUser;
+        private TextBox textBoxpasswordUser;
         private Label label1;
         private Label label2;
         private Label label3;
@@ -315,18 +319,18 @@
         private Label label5;
         private Label label6;
         private Label label7;
-        private TextBox textBox6;
-        private TextBox textBox7;
-        private TextBox textBox8;
-        private TextBox textBox9;
-        private TextBox textBox10;
-        private Label label8;
+        private TextBox textBoxagePatient;
+        private TextBox textBoxnamePatient;
+        private TextBox textBoxgenderPatient;
+        private TextBox textBoxfirstnamePatient;
         private Label label9;
         private Label label10;
         private Label label11;
         private Label label12;
         private Label label13;
-        private Button button1;
-        private Button button2;
+        private Button buttonaddUser;
+        private Button buttonaddPatient;
+        private MySql.Data.MySqlClient.MySqlCommand mySqlCommand1;
+        private ComboBox comboBoxroleUser;
     }
 }
