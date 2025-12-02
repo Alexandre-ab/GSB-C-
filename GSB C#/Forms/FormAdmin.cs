@@ -33,7 +33,7 @@ namespace GSB_C_.Forms
             this.Hide();
             FormAddUser formAddUser = new FormAddUser();
             formAddUser.ShowDialog();
-
+            this.Show();
 
 
 

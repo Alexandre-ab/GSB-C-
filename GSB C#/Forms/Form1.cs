@@ -20,6 +20,7 @@ public partial class Form1 : Form
         if (user != null && user.Role == true)
 
         {
+            //User test = user;
             UserSession.CurrentUser = user;
             this.Hide();
             FormAdmin formAdmin = new FormAdmin();

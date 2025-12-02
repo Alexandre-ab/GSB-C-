@@ -30,7 +30,7 @@
         {
             dataGridViewDoctorListListMedecine = new DataGridView();
             prescription = new Button();
-            button2 = new Button();
+            buttonPatient = new Button();
             Deconnexion = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridViewDoctorListListMedecine).BeginInit();
             SuspendLayout();
@@ -43,7 +43,6 @@
             dataGridViewDoctorListListMedecine.RowHeadersWidth = 51;
             dataGridViewDoctorListListMedecine.Size = new Size(755, 329);
             dataGridViewDoctorListListMedecine.TabIndex = 0;
-            dataGridViewDoctorListListMedecine.CellContentClick += dataGridViewDoctorListListMedecine_CellContentClick;
             dataGridViewDoctorListListMedecine.CellContentDoubleClick += dataGridViewDoctorListListMedecine_CellContentDoubleClick;
             // 
             // prescription
@@ -56,15 +55,15 @@
             prescription.UseVisualStyleBackColor = true;
             prescription.Click += button1_Click;
             // 
-            // button2
+            // buttonPatient
             // 
-            button2.Location = new Point(596, 402);
-            button2.Name = "button2";
-            button2.Size = new Size(182, 36);
-            button2.TabIndex = 2;
-            button2.Text = "Patient ";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
+            buttonPatient.Location = new Point(596, 402);
+            buttonPatient.Name = "buttonPatient";
+            buttonPatient.Size = new Size(182, 36);
+            buttonPatient.TabIndex = 2;
+            buttonPatient.Text = "Patient ";
+            buttonPatient.UseVisualStyleBackColor = true;
+            buttonPatient.Click += buttonPatient_Click;
             // 
             // Deconnexion
             // 
@@ -83,13 +82,11 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Controls.Add(Deconnexion);
-            Controls.Add(button2);
+            Controls.Add(buttonPatient);
             Controls.Add(prescription);
             Controls.Add(dataGridViewDoctorListListMedecine);
             Name = "FormDoctor";
             Text = "FormDoctor";
-            Load += FormDoctor_Load;
-            DoubleClick += FormDoctor_DoubleClick;
             ((System.ComponentModel.ISupportInitialize)dataGridViewDoctorListListMedecine).EndInit();
             ResumeLayout(false);
         }
@@ -98,7 +95,7 @@
 
         private DataGridView dataGridViewDoctorListListMedecine;
         private Button prescription;
-        private Button button2;
+        private Button buttonPatient;
         private Button Deconnexion;
     }
 }

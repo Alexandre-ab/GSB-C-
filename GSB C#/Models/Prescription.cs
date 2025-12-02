@@ -14,7 +14,9 @@ namespace GSB_C_.Models
 		public int Quantity { get; set; }
 		public DateTime Validity { get; set; }
 
-		public Prescription() { }
+        public string NomAffichage { get; set; }
+
+        public Prescription() { }
 
 		public Prescription(int prescription, int patients, int User, int Quantity, DateTime Validity)
 		{

@@ -21,8 +21,10 @@ namespace GSB_C_.Models
 
         public bool Gender { get; set; }
 
+      
 
-        public Patients() { }
+
+        public Patients() { }               
 
         public Patients(int patient, int user, string name, string firstname, int age, bool gender) {
 

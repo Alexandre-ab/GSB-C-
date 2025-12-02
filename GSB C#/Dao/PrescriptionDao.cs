@@ -19,7 +19,9 @@ public class PrescriptionDAO
 
                 MySqlCommand myCommand = new MySqlCommand();
                 myCommand.Connection = connection;
-                myCommand.CommandText = "SELECT * FROM Prescription;";
+                myCommand.CommandText = @"SELECT p.*, pat.name as NomDuPatient 
+                          FROM Prescription p
+                          JOIN Patients pat ON p.id_patients = pat.id_patients"; 
 
                 using var myReader = myCommand.ExecuteReader();
                 {
@@ -32,6 +34,7 @@ public class PrescriptionDAO
                         DateTime validity = myReader.GetDateTime("validity");
 
                         Prescription prescription = new Prescription(prescriptionId, patientId, userId, quantity, validity);
+                        prescription.NomAffichage = myReader.GetString("NomDuPatient");
                         prescriptions.Add(prescription);
                     }
                 }

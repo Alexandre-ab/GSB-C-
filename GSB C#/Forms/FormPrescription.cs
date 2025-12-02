@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using GSB_C_.Models;
 using GSB_C_.Utils;
+using GSB2.DAO;
 using iTextSharp.text.pdf.parser.clipper;
 using Org.BouncyCastle.Asn1.X509;
 using Org.BouncyCastle.Bcpg.Sig;
@@ -19,7 +20,8 @@ namespace GSB_C_.Forms
 {
     public partial class FormPrescription : Form
     {
-        private int prescriptionId = 0; // Variable pour stocker l'ID de la prescription sélectionnée
+        private int prescriptionId = 0;// Variable pour stocker l'ID de la prescription sélectionnée
+        int idUserConnect = UserSession.CurrentUser.UserId;
         public FormPrescription()
         {
             InitializeComponent();
@@ -27,7 +29,16 @@ namespace GSB_C_.Forms
             List<Prescription> preslist = presDAO.GetAll();
 
 
+            PatientsDAO Dao = new PatientsDAO();
+            List<Patients> patlist = Dao.GetAll();
+
+            comboBoxpatientID.DataSource = patlist;
+            comboBoxpatientID.DisplayMember = "Name";
+            comboBoxpatientID.ValueMember = "PatientID";
+
+
             this.dataGridView1Prescription.DataSource = preslist;
+            
         }
 
         private void FormPrescription_Load(object sender, EventArgs e)
@@ -49,7 +60,7 @@ namespace GSB_C_.Forms
                     this.prescriptionId = int.Parse(row.Cells[0].Value.ToString());
 
                     // On remplit les champs pour aider l'utilisateur
-                    textPatientID.Text = row.Cells[1].Value.ToString();
+            
                     textUserID.Text = row.Cells[2].Value.ToString();
                     textQuantity.Text = row.Cells[3].Value.ToString();
                     textValidity.Text = row.Cells[4].Value.ToString();
@@ -59,26 +70,16 @@ namespace GSB_C_.Forms
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            if (int.TryParse(textPatientID.Text, out int patientId))
-            {
-                // Succès : la variable 'patientId' contient maintenant la valeur numérique.
-            }
-            else
-            {
-
-                MessageBox.Show("ID n'existe pas.");
-                // Échec : L'utilisateur a entré du texte invalide (ex: "abc")
-                // Vous devez afficher un message d'erreur ici.
-            }
+            
         }
         // bouton de création d'une prescription 
         private void button1_Click(object sender, EventArgs e)
         {
-            int patientId = int.Parse(textPatientID.Text); // données convertie avec parse
+           
             int userId = int.Parse(textUserID.Text);
             int quantity = int.Parse(textQuantity.Text);
             DateTime validity = DateTime.Parse(textValidity.Text);
-            Prescription newPrescription = new Prescription(0, patientId, userId, quantity, validity);
+            Prescription newPrescription = new Prescription(0,idUserConnect, userId, quantity, validity);
             PrescriptionDAO presDAO = new PrescriptionDAO();
             bool success = presDAO.Add(newPrescription);
             if (success)
@@ -100,11 +101,11 @@ namespace GSB_C_.Forms
                 return;
             }
 
-            int patientId = int.Parse(textPatientID.Text);
+           
             int userId = int.Parse(textUserID.Text);
             int quantity = int.Parse(textQuantity.Text);
             DateTime validity = DateTime.Parse(textValidity.Text);
-            Prescription updatedPrescription = new Prescription(prescriptionId, patientId, userId, quantity, validity);
+            Prescription updatedPrescription = new Prescription(prescriptionId, idUserConnect, userId, quantity, validity);
             PrescriptionDAO presDAO = new PrescriptionDAO();
             bool success = presDAO.Update(updatedPrescription);
             if (success)
@@ -137,7 +138,7 @@ namespace GSB_C_.Forms
         }
         //bouton export PDF 
         private void button4_Click(object sender, EventArgs e)
-           
+
         {
             // 1. SÉCURITÉ
             if (this.prescriptionId == 0)
@@ -147,17 +148,17 @@ namespace GSB_C_.Forms
             }
 
             // 2. RÉCUPÉRATION (Avec int.Parse c'est risqué, mais gardons ta logique pour l'instant)
-            int patientId = int.Parse(textPatientID.Text);
+            
             int userId = int.Parse(textUserID.Text);
             int quantity = int.Parse(textQuantity.Text);
             DateTime validity = DateTime.Parse(textValidity.Text);
 
             // On crée l'objet (On met le vrai ID 'this.prescriptionId' au lieu de 0, c'est plus propre)
-            Prescription maPrescription = new Prescription(this.prescriptionId, patientId, userId, quantity, validity);
+            Prescription maPrescription = new Prescription(this.prescriptionId,0, userId, quantity, validity);
 
-           
+
             // 3. CALCUL DU CHEMIN "TÉLÉCHARGEMENTS"
-          
+
 
             // A. Dossier "Downloads"
             string dossierUser = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
@@ -165,7 +166,7 @@ namespace GSB_C_.Forms
 
             // B. Nom du fichier (JUSTE LE NOM, pas C:\\...)
             // J'ajoute un timestamp (date heure) pour ne pas écraser les anciens fichiers
-            string nomFichier = $"Prescription_Patient_{patientId}_{DateTime.Now:yyyyMMdd_HHmmss}.pdf";
+            string nomFichier = $"Prescription_Patient_{userId}_{DateTime.Now:yyyyMMdd_HHmmss}.pdf";
 
             // C. Chemin complet
             string cheminFinal = Path.Combine(dossierDownload, nomFichier);
@@ -185,7 +186,7 @@ namespace GSB_C_.Forms
                 MessageBox.Show($"C'est fait !\nFichier enregistré ici :\n{cheminFinal}");
 
                 // Petit bonus : Ouvrir le dossier ou le fichier
-             
+
             }
             else
             {
@@ -194,6 +195,7 @@ namespace GSB_C_.Forms
         }
     }
 }
+
 
 
 

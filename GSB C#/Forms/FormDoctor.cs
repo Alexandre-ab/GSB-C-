@@ -22,21 +22,6 @@ namespace GSB_C_.Forms
 
         }
 
-        private void FormDoctor_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridViewDoctorListListMedecine_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void FormDoctor_DoubleClick(object sender, EventArgs e)
-        {
-
-        }
-
         private void dataGridViewDoctorListListMedecine_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             MedicineDAO medDAO = new MedicineDAO();
@@ -54,17 +39,18 @@ namespace GSB_C_.Forms
             FormPrescription formPrescription = new FormPrescription();
             formPrescription.ShowDialog();
         }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void Deconnexion_Click(object sender, EventArgs e)
         {
             this.Hide();
             Form1 form1 = new Form1();
             form1.ShowDialog();
+        }
+
+        private void buttonPatient_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            FormAddpatient formAddpatient = new FormAddpatient();
+            formAddpatient.ShowDialog();
         }
     }
 }
