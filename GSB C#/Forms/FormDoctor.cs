@@ -27,30 +27,32 @@ namespace GSB_C_.Forms
             MedicineDAO medDAO = new MedicineDAO();
             List<Medicine> medlist = medDAO.GetAll();
 
-            FormDetailMedecine formDetailMedicine = new FormDetailMedecine();
+            FormDetailMedicine formDetailMedicine = new FormDetailMedicine();
             formDetailMedicine.dataGridViewDetailMedicine.DataSource = medlist;
             formDetailMedicine.Show();
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)//  création prescription
         {
             this.Hide();
             FormPrescription formPrescription = new FormPrescription();
             formPrescription.ShowDialog();
+            this.Show();
         }
-        private void Deconnexion_Click(object sender, EventArgs e)
+        private void Deconnexion_Click(object sender, EventArgs e) 
         {
             this.Hide();
             Form1 form1 = new Form1();
             form1.ShowDialog();
         }
 
-        private void buttonPatient_Click(object sender, EventArgs e)
+        private void buttonPatient_Click(object sender, EventArgs e) // ajout patient
         {
             this.Hide();
             FormAddpatient formAddpatient = new FormAddpatient();
             formAddpatient.ShowDialog();
+            this.Show();
         }
     }
 }

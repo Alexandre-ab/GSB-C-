@@ -41,11 +41,6 @@ namespace GSB_C_.Forms
             
         }
 
-        private void FormPrescription_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             {
@@ -66,11 +61,6 @@ namespace GSB_C_.Forms
                     textValidity.Text = row.Cells[4].Value.ToString();
                 }// permet de vérifier si on sélectionne une ligne valide
             }
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            
         }
         // bouton de création d'une prescription 
         private void button1_Click(object sender, EventArgs e)

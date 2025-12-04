@@ -29,81 +29,121 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            button1 = new Button();
             textBoxLoginPassword = new TextBox();
             textBoxLoginEmail = new TextBox();
-            pictureBox1 = new PictureBox();
-            buttonCreationCompte = new Button();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            button1 = new Button();
+            label1 = new Label();
+            labelEmail = new Label();
+            labelPassword = new Label();
+            labelTitle = new Label();
+            linkLabelCreateAccount = new LinkLabel();
             SuspendLayout();
-            // 
-            // button1
-            // 
-            button1.Location = new Point(130, 357);
-            button1.Name = "button1";
-            button1.Size = new Size(88, 43);
-            button1.TabIndex = 0;
-            button1.Text = "Login";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
             // 
             // textBoxLoginPassword
             // 
-            textBoxLoginPassword.Location = new Point(84, 324);
+            textBoxLoginPassword.Font = new Font("Segoe UI", 12F);
+            textBoxLoginPassword.Location = new Point(40, 230);
             textBoxLoginPassword.Name = "textBoxLoginPassword";
-            textBoxLoginPassword.PlaceholderText = "Password";
-            textBoxLoginPassword.Size = new Size(186, 27);
+            textBoxLoginPassword.PasswordChar = '●';
+            textBoxLoginPassword.Size = new Size(260, 29);
             textBoxLoginPassword.TabIndex = 1;
-            textBoxLoginPassword.UseSystemPasswordChar = true;
-       
             // 
             // textBoxLoginEmail
             // 
-            textBoxLoginEmail.Location = new Point(84, 121);
+            textBoxLoginEmail.Font = new Font("Segoe UI", 12F);
+            textBoxLoginEmail.Location = new Point(40, 160);
             textBoxLoginEmail.Name = "textBoxLoginEmail";
-            textBoxLoginEmail.PlaceholderText = "Email";
-            textBoxLoginEmail.Size = new Size(186, 27);
-            textBoxLoginEmail.TabIndex = 2;
-            
+            textBoxLoginEmail.Size = new Size(260, 29);
+            textBoxLoginEmail.TabIndex = 0;
             // 
-            // pictureBox1
+            // button1
             // 
-            pictureBox1.Dock = DockStyle.Fill;
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(0, 0);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(341, 474);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 3;
-            pictureBox1.TabStop = false;
-          
-          
+            button1.BackColor = Color.FromArgb(0, 123, 255);
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            button1.ForeColor = Color.White;
+            button1.Location = new Point(40, 290);
+            button1.Name = "button1";
+            button1.Size = new Size(260, 45);
+            button1.TabIndex = 2;
+            button1.Text = "Login";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
             // 
-            // buttonCreationCompte
+            // label1
             // 
-            buttonCreationCompte.Location = new Point(107, 406);
-            buttonCreationCompte.Name = "buttonCreationCompte";
-            buttonCreationCompte.Size = new Size(139, 44);
-            buttonCreationCompte.TabIndex = 4;
-            buttonCreationCompte.Text = "Créer un compte";
-            buttonCreationCompte.UseVisualStyleBackColor = true;
-            buttonCreationCompte.Click += buttonCreationCompte_Click;
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 9.75F);
+            label1.ForeColor = Color.Gray;
+            label1.Location = new Point(40, 90);
+            label1.Name = "label1";
+            label1.Size = new Size(183, 17);
+            label1.TabIndex = 4;
+            label1.Text = "Please enter your details below";
+            // 
+            // labelEmail
+            // 
+            labelEmail.AutoSize = true;
+            labelEmail.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+            labelEmail.Location = new Point(40, 140);
+            labelEmail.Name = "labelEmail";
+            labelEmail.Size = new Size(40, 17);
+            labelEmail.TabIndex = 5;
+            labelEmail.Text = "Email";
+            // 
+            // labelPassword
+            // 
+            labelPassword.AutoSize = true;
+            labelPassword.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+            labelPassword.Location = new Point(40, 210);
+            labelPassword.Name = "labelPassword";
+            labelPassword.Size = new Size(66, 17);
+            labelPassword.TabIndex = 6;
+            labelPassword.Text = "Password";
+            // 
+            // labelTitle
+            // 
+            labelTitle.AutoSize = true;
+            labelTitle.Font = new Font("Segoe UI", 24F, FontStyle.Bold);
+            labelTitle.Location = new Point(35, 40);
+            labelTitle.Name = "labelTitle";
+            labelTitle.Size = new Size(268, 45);
+            labelTitle.TabIndex = 7;
+            labelTitle.Text = "Welcome Back!";
+            // 
+            // linkLabelCreateAccount
+            // 
+            linkLabelCreateAccount.AutoSize = true;
+            linkLabelCreateAccount.Font = new Font("Segoe UI", 9F);
+            linkLabelCreateAccount.Location = new Point(100, 350);
+            linkLabelCreateAccount.Name = "linkLabelCreateAccount";
+            linkLabelCreateAccount.Size = new Size(144, 15);
+            linkLabelCreateAccount.TabIndex = 3;
+            linkLabelCreateAccount.TabStop = true;
+            linkLabelCreateAccount.Text = "Don't have an account yet?";
+            linkLabelCreateAccount.LinkClicked += linkLabelCreateAccount_LinkClicked;
             // 
             // Form1
             // 
-            BackColor = Color.Azure;
+            BackColor = Color.White;
             ClientSize = new Size(341, 474);
-            Controls.Add(buttonCreationCompte);
+            Controls.Add(linkLabelCreateAccount);
+            Controls.Add(labelTitle);
+            Controls.Add(labelPassword);
+            Controls.Add(labelEmail);
+            Controls.Add(label1);
+            Controls.Add(button1);
             Controls.Add(textBoxLoginEmail);
             Controls.Add(textBoxLoginPassword);
-            Controls.Add(button1);
-            Controls.Add(pictureBox1);
+            Font = new Font("Segoe UI", 9F);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "Form1";
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Login";
             ResumeLayout(false);
             PerformLayout();
-
         }
 
         #endregion
@@ -111,7 +151,10 @@
         private Button button1;
         private TextBox textBoxLoginPassword;
         protected internal TextBox textBoxLoginEmail;
-        private PictureBox pictureBox1;
-        private Button buttonCreationCompte;
+        private Label label1;
+        private Label labelEmail;
+        private Label labelPassword;
+        private Label labelTitle;
+        private LinkLabel linkLabelCreateAccount;
     }
 }

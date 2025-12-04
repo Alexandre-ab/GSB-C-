@@ -11,9 +11,9 @@ using GSB_C_.Models;
 
 namespace GSB_C_.Forms
 {
-    public partial class FormDetailMedecine : Form
+    public partial class FormDetailMedicine : Form
     {
-        public FormDetailMedecine()
+        public FormDetailMedicine()
         {
             InitializeComponent();
             MedicineDAO medDAO = new MedicineDAO();
@@ -22,7 +22,7 @@ namespace GSB_C_.Forms
             this.dataGridViewDetailMedicine.DataSource = medlist;
         }
 
-        private void FormDetailMedecine_Load(object sender, EventArgs e)
+        private void FormDetailMedicine_Load(object sender, EventArgs e)
         {
 
         }

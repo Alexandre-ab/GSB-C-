@@ -171,7 +171,7 @@ public class PatientsDAO
                 myCommand.Connection = connection;
                 myCommand.CommandText = @"UPDATE Patients SET id_users = @userId, name = @name, 
                                          firstname = @firstname, age = @age, gender = @gender 
-                                         WHERE patient_id = @patientId;";
+                                         WHERE id_patients = @patientId;";
                 myCommand.Parameters.AddWithValue("@patientId", patient.PatientID);
                 myCommand.Parameters.AddWithValue("@userId", patient.UserId);
                 myCommand.Parameters.AddWithValue("@name", patient.Name);

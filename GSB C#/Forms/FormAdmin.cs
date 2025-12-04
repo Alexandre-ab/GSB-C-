@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,11 +24,6 @@ namespace GSB_C_.Forms
             this.dataGridViewAdmin.DataSource = patlist;
         }
 
-        private void dataGridViewAdmin_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void buttonAdUser_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -39,16 +35,31 @@ namespace GSB_C_.Forms
 
         }
 
-        private void FormAdmin_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void Deconnexion_Click(object sender, EventArgs e)
         {
             this.Hide();
             Form1 form1 = new Form1();
             form1.ShowDialog();
         }
+
+
+        private int idSelectedUser = 0;
+        private void dataGridViewAdmin_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+           
+        }
+
+
+        private void buttonModifySuppUser_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            FormModifyAdmin formModifyAdmin = new FormModifyAdmin();
+            formModifyAdmin.ShowDialog();
+            this.Show();
+        }
     }
 }
+    
+           
+                
+    

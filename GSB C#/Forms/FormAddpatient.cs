@@ -8,6 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using GSB_C_.Models;
+using GSB2.DAO; 
+
+
+
+
+
+
 
 namespace GSB_C_.Forms
 {
@@ -16,6 +23,10 @@ namespace GSB_C_.Forms
         public FormAddpatient()
         {
             InitializeComponent();
+            PatientsDAO patientDAO = new PatientsDAO();
+            List<Patients> patlist = patientDAO.GetAll();
+            this.dataGridView1.DataSource = patlist;
+
         }
 
         private void buttonaddPatient_Click(object sender, EventArgs e)
@@ -43,6 +54,7 @@ namespace GSB_C_.Forms
                 MessageBox.Show("Échec de l'ajout du patient.");
             }
         }
+
     }
-    }
+}
 

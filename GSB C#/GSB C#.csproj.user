@@ -19,6 +19,9 @@
     <Compile Update="Forms\FormDoctor.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\FormModifyAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forms\FormPrescription.cs">
       <SubType>Form</SubType>
     </Compile>
