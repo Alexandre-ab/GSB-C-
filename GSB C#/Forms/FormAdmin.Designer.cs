@@ -34,22 +34,9 @@
             Deconnexion = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridViewAdmin).BeginInit();
             SuspendLayout();
-            // 
-            // dataGridViewAdmin
-            // 
-            dataGridViewAdmin.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewAdmin.ColumnHeadersVisible = false;
-            dataGridViewAdmin.Location = new Point(12, 41);
-            dataGridViewAdmin.Margin = new Padding(3, 2, 3, 2);
-            dataGridViewAdmin.Name = "dataGridViewAdmin";
-            dataGridViewAdmin.RowHeadersWidth = 51;
-            dataGridViewAdmin.Size = new Size(678, 237);
-            dataGridViewAdmin.TabIndex = 0;
-            dataGridViewAdmin.CellContentClick += dataGridViewAdmin_CellContentClick;
-            // 
-            // buttonAdUser
-            // 
-            buttonAdUser.BackColor = Color.Green;
+            buttonAdUser.BackColor = Color.DodgerBlue;
+            buttonAdUser.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            buttonAdUser.ForeColor = Color.White;
             buttonAdUser.Location = new Point(401, 291);
             buttonAdUser.Margin = new Padding(3, 2, 3, 2);
             buttonAdUser.Name = "buttonAdUser";
@@ -62,6 +49,8 @@
             // buttonModifySuppUser
             // 
             buttonModifySuppUser.BackColor = Color.DodgerBlue;
+            buttonModifySuppUser.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            buttonModifySuppUser.ForeColor = Color.White;
             buttonModifySuppUser.Location = new Point(12, 292);
             buttonModifySuppUser.Margin = new Padding(3, 2, 3, 2);
             buttonModifySuppUser.Name = "buttonModifySuppUser";
@@ -74,6 +63,8 @@
             // Deconnexion
             // 
             Deconnexion.BackColor = Color.Crimson;
+            Deconnexion.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            Deconnexion.ForeColor = Color.White;
             Deconnexion.Location = new Point(565, 9);
             Deconnexion.Margin = new Padding(3, 2, 3, 2);
             Deconnexion.Name = "Deconnexion";
@@ -87,6 +78,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.LightGray;
             ClientSize = new Size(700, 338);
             Controls.Add(Deconnexion);
             Controls.Add(buttonModifySuppUser);
@@ -94,16 +86,30 @@
             Controls.Add(dataGridViewAdmin);
             Margin = new Padding(3, 2, 3, 2);
             Name = "FormAdmin";
-            Text = "FormAdmin";
+            Text = "Administration Dashboard";
             ((System.ComponentModel.ISupportInitialize)dataGridViewAdmin).EndInit();
             ResumeLayout(false);
+            // 
+            // dataGridViewAdmin
+            // 
+            dataGridViewAdmin.BackgroundColor = Color.White;
+            dataGridViewAdmin.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewAdmin.ColumnHeadersVisible = true;
+            dataGridViewAdmin.Location = new Point(12, 41);
+            dataGridViewAdmin.Margin = new Padding(3, 2, 3, 2);
+            dataGridViewAdmin.Name = "dataGridViewAdmin";
+            dataGridViewAdmin.RowHeadersWidth = 51;
+            dataGridViewAdmin.Size = new Size(678, 237);
+            dataGridViewAdmin.TabIndex = 0;
+            dataGridViewAdmin.CellContentClick += dataGridViewAdmin_CellContentClick;
         }
+
 
         #endregion
 
         private DataGridView dataGridViewAdmin;
         private Button buttonAdUser;
-        private Button buttonDeleteUser;
+        
         private Button buttonModifySuppUser;
         private Button Deconnexion;
     }

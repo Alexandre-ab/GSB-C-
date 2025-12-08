@@ -36,7 +36,6 @@
             labelEmail = new Label();
             labelPassword = new Label();
             labelTitle = new Label();
-            linkLabelCreateAccount = new LinkLabel();
             SuspendLayout();
             // 
             // textBoxLoginPassword
@@ -45,7 +44,7 @@
             textBoxLoginPassword.Location = new Point(40, 230);
             textBoxLoginPassword.Name = "textBoxLoginPassword";
             textBoxLoginPassword.PasswordChar = '●';
-            textBoxLoginPassword.Size = new Size(260, 29);
+            textBoxLoginPassword.Size = new Size(260, 34);
             textBoxLoginPassword.TabIndex = 1;
             // 
             // textBoxLoginEmail
@@ -53,7 +52,7 @@
             textBoxLoginEmail.Font = new Font("Segoe UI", 12F);
             textBoxLoginEmail.Location = new Point(40, 160);
             textBoxLoginEmail.Name = "textBoxLoginEmail";
-            textBoxLoginEmail.Size = new Size(260, 29);
+            textBoxLoginEmail.Size = new Size(260, 34);
             textBoxLoginEmail.TabIndex = 0;
             // 
             // button1
@@ -78,9 +77,9 @@
             label1.ForeColor = Color.Gray;
             label1.Location = new Point(40, 90);
             label1.Name = "label1";
-            label1.Size = new Size(183, 17);
+            label1.Size = new Size(188, 23);
             label1.TabIndex = 4;
-            label1.Text = "Please enter your details below";
+            label1.Text = "Merci de vous identifier";
             // 
             // labelEmail
             // 
@@ -88,7 +87,7 @@
             labelEmail.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
             labelEmail.Location = new Point(40, 140);
             labelEmail.Name = "labelEmail";
-            labelEmail.Size = new Size(40, 17);
+            labelEmail.Size = new Size(54, 23);
             labelEmail.TabIndex = 5;
             labelEmail.Text = "Email";
             // 
@@ -98,7 +97,7 @@
             labelPassword.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
             labelPassword.Location = new Point(40, 210);
             labelPassword.Name = "labelPassword";
-            labelPassword.Size = new Size(66, 17);
+            labelPassword.Size = new Size(85, 23);
             labelPassword.TabIndex = 6;
             labelPassword.Text = "Password";
             // 
@@ -108,27 +107,14 @@
             labelTitle.Font = new Font("Segoe UI", 24F, FontStyle.Bold);
             labelTitle.Location = new Point(35, 40);
             labelTitle.Name = "labelTitle";
-            labelTitle.Size = new Size(268, 45);
+            labelTitle.Size = new Size(231, 54);
             labelTitle.TabIndex = 7;
-            labelTitle.Text = "Welcome Back!";
-            // 
-            // linkLabelCreateAccount
-            // 
-            linkLabelCreateAccount.AutoSize = true;
-            linkLabelCreateAccount.Font = new Font("Segoe UI", 9F);
-            linkLabelCreateAccount.Location = new Point(100, 350);
-            linkLabelCreateAccount.Name = "linkLabelCreateAccount";
-            linkLabelCreateAccount.Size = new Size(144, 15);
-            linkLabelCreateAccount.TabIndex = 3;
-            linkLabelCreateAccount.TabStop = true;
-            linkLabelCreateAccount.Text = "Don't have an account yet?";
-            linkLabelCreateAccount.LinkClicked += linkLabelCreateAccount_LinkClicked;
+            labelTitle.Text = "Bienvenue ";
             // 
             // Form1
             // 
             BackColor = Color.White;
             ClientSize = new Size(341, 474);
-            Controls.Add(linkLabelCreateAccount);
             Controls.Add(labelTitle);
             Controls.Add(labelPassword);
             Controls.Add(labelEmail);
@@ -142,6 +128,7 @@
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Login";
+            Load += Form1_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -155,6 +142,5 @@
         private Label labelEmail;
         private Label labelPassword;
         private Label labelTitle;
-        private LinkLabel linkLabelCreateAccount;
     }
 }

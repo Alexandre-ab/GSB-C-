@@ -45,9 +45,12 @@ namespace GSB_C_
 
         private void linkLabelCreateAccount_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            FormAddUser formAddUser = new FormAddUser();
-            formAddUser.Show();
-            this.Hide();
+           
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
