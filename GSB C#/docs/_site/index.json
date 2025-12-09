@@ -1,0 +1,17 @@
+{
+  "api/api/index.html": {
+    "href": "api/api/index.html",
+    "title": "Référence API | GSB WinForms",
+    "summary": "Référence API Cette section est générée automatiquement par DocFX à partir du projet GSB C#.csproj. Après exécution de docfx metadata puis docfx build, les classes, méthodes et propriétés seront accessibles depuis le menu de gauche comme dans l’exemple gsbMonolith DAO."
+  },
+  "articles/overview.html": {
+    "href": "articles/overview.html",
+    "title": "Présentation et architecture | GSB WinForms",
+    "summary": "Présentation et architecture Cette application WinForms cible .NET 8 et s’appuie sur MySQL pour la persistance. Le code suit une séparation claire entre couche d’accès aux données, modèles métier et formulaires d’interface. Couche DAO Dao/Database.cs : fournit les connexions MySQL. Dao/MedicineDao.cs, PatientsDao.cs, PrescriptionDao.cs, UserDAO.cs, AppartientDao.cs : CRUD et requêtes spécialisées sur les tables correspondantes. Modèles métier Models contient les entités Medicine, Patients, Prescription, Appartient, User et la session UserSession. Interface WinForms Les formulaires dans Forms couvrent l’administration (FormAdmin, FormModifyAdmin), la gestion des patients et médecins (FormDoctor, FormAddpatient, FormDetailMedicine, FormPrescription), ainsi que la création d’utilisateurs (FormAddUser). Utilitaires Utils/ExporterPDF.cs : génération d’export PDF (iTextSharp). Générer la documentation (DocFX) Installer DocFX : dotnet tool install -g docfx (ou choco install docfx sur Windows). Depuis le dossier docs, générer les métadonnées : docfx metadata. Construire le site statique : docfx build -o _site. Ouvrir _site/index.html dans un navigateur ou publier le dossier _site sur GitHub Pages/Azure Static Web Apps. La page « Référence API » regroupe automatiquement les espaces de noms et classes détectés dans le projet, pour reproduire l’expérience de navigation de l’exemple gsbMonolith DAO."
+  },
+  "index.html": {
+    "href": "index.html",
+    "title": "GSB WinForms — Documentation | GSB WinForms",
+    "summary": "GSB WinForms — Documentation Bienvenue dans la documentation du projet GSB. Cette documentation est générée avec DocFX pour offrir une navigation similaire à l’exemple de gsbMonolith DAO (voir https://ryuksylux.github.io/gsbMonolith/api/gsbMonolith.DAO.html). Vous trouverez : Une présentation fonctionnelle et technique dans la section « Présentation ». Une référence API générée automatiquement à partir du code C# (DAO, modèles, formulaires et utilitaires). Des instructions pour générer et publier le site statique. Utilisez le menu de gauche pour naviguer entre les pages et la recherche intégrée pour retrouver rapidement une classe ou une méthode."
+  }
+}
