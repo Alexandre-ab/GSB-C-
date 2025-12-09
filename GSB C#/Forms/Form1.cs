@@ -24,7 +24,6 @@ namespace GSB_C_
                 UserSession.CurrentUser = user;
                 this.Hide();
                 FormAdmin formAdmin = new FormAdmin();
-                MessageBox.Show("Login successful! Welcome " + user);
                 formAdmin.ShowDialog();
 
             }
@@ -33,7 +32,6 @@ namespace GSB_C_
                 UserSession.CurrentUser = user;
                 this.Hide();
                 FormDoctor formUser = new FormDoctor();
-                MessageBox.Show("Login successful! Welcome " + user);
                 formUser.ShowDialog();
             }
             else
@@ -41,16 +39,6 @@ namespace GSB_C_
                 MessageBox.Show("Login failed! Invalid email or password.");
             }
 
-        }
-
-        private void linkLabelCreateAccount_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-           
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
+        }   
     }
 }
