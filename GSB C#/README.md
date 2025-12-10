@@ -43,10 +43,15 @@ Application WinForms (C#, .NET 8) pour gérer prescriptions, médicaments, patie
 
 ## Installation & configuration
 1. Cloner le dépôt.
-2. Adapter la chaîne MySQL dans `Dao/Database.cs` :
-   - serveur/port
-   - utilisateur/mot de passe
-   - base (`bts-gsb` par défaut)
+2. Démarrer la base de données :
+   - **Option A (Docker - Recommandé)** :
+     - Aller dans le dossier `docker/`.
+     - Lancer : `docker-compose up -d`.
+     - La base `bts-gsb` est automatiquement créée et peuplée sur `localhost:3307` (pwd: `rootpassword`).
+     - PhpMyAdmin est accessible sur `http://localhost:8080`.
+   - **Option B (Manuelle)** :
+     - Importer le fichier `docker/init.sql` dans votre serveur MySQL.
+     - Adapter la chaîne de connexion dans `Dao/Database.cs` (serveur, port, user, pwd) si nécessaire.
 3. Restaurer les dépendances NuGet : `dotnet restore`
 
 ## Démarrage rapide
@@ -78,10 +83,12 @@ Tables (à adapter) :
 - `Appartient` : id_appartient PK, id_prescription FK, id_medicine FK, quantity, posology.
 
 Initialisation :
+Utilisez le fichier `docker/init.sql` pour créer la base de données, les tables et insérer les données de test.
+
+Alternativement, suivez les étapes manuelles :
 1. Créer la base `bts-gsb`.
-2. Créer les tables (types/contraintes à ajuster).
-3. Insérer un admin initial (ex. `INSERT INTO Users (...) VALUES ('Admin','Admin','admin@local','<hash>','admin');`).
-4. Ajuster la chaîne de connexion dans `Dao/Database.cs`.
+2. Importer le contenu de `docker/init.sql`.
+3. Ajuster la chaîne de connexion dans `Dao/Database.cs`.
 
 SQL minimal (exemple) :
 ```sql

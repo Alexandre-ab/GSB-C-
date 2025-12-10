@@ -311,3 +311,6 @@ VALUES
 6. **Soft delete** : ajouter un champ `deleted_at` pour marquer les suppressions logiques au lieu de physiques.
 
 
+
+
+

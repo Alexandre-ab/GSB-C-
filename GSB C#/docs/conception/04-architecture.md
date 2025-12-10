@@ -486,3 +486,6 @@ GSB C#
 Cette architecture garantit une application modulaire, testable et évolutive, conforme aux bonnes pratiques du développement logiciel.
 
 
+
+
+
