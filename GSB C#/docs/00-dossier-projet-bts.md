@@ -4,9 +4,9 @@
 
 ---
 
-**Candidat** : [Votre nom]  
-**Session** : 2024-2025  
-**Établissement** : [Nom de votre établissement]  
+**Candidat** : Boué Alexandre 
+**Session** : 2024-2026
+**Établissement** : Nexa Digital School
 **Formation** : BTS Services Informatiques aux Organisations (SIO)  
 **Option** : Solutions Logicielles et Applications Métiers (SLAM)
 
@@ -367,10 +367,10 @@ Je tiens à remercier :
 
 ---
 
-**Candidat** : [Votre nom]  
-**Date de soutenance** : [Date]  
-**Établissement** : [Nom établissement]  
-**Session** : 2024-2025
+**Candidat** : Alexandre Boué 
+**Date de soutenance** : 2026
+**Établissement** : Nexa Digital School
+**Session** : 2024-2026
 
 
 
