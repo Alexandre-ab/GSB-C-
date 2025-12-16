@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using GSB_C_.Models;
 
+
+
 namespace GSB_C_.Forms
 {
     public partial class FormDetailMedicine : Form
@@ -18,6 +20,8 @@ namespace GSB_C_.Forms
             InitializeComponent();
             MedicineDAO medDAO = new MedicineDAO();
             List<Medicine> medlist = medDAO.GetAll();
+          
+
 
             this.dataGridViewDetailMedicine.DataSource = medlist;
         }
@@ -31,5 +35,17 @@ namespace GSB_C_.Forms
         {
 
         }
+
+        private void buttonTopMedicines_Click(object sender, EventArgs e)
+        {
+            // Période par défaut : année en cours
+            DateTime dateDebut = new DateTime(DateTime.Now.Year, 1, 1);
+            DateTime dateFin = DateTime.Now;
+
+            FormTopMedicines formTop = new FormTopMedicines(dateDebut, dateFin);
+            formTop.ShowDialog();
+        }
+
+
     }
 }

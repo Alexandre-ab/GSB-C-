@@ -21,7 +21,7 @@ public class PrescriptionDAO
                 myCommand.Connection = connection;
                 myCommand.CommandText = @"SELECT p.*, pat.name as NomDuPatient 
                           FROM Prescription p
-                          JOIN Patients pat ON p.id_patients = pat.id_patients"; 
+                          JOIN Patients pat ON p.id_patients = pat.id_patients";
 
                 using var myReader = myCommand.ExecuteReader();
                 {
@@ -254,4 +254,331 @@ public class PrescriptionDAO
             }
         }
     }
+
+    // Récupérer les prescriptions sur une période donnée
+    public List<Prescription> GetByDateRange(DateTime dateDebut, DateTime dateFin)
+    {
+        List<Prescription> prescriptions = new List<Prescription>();
+
+        using (var connection = db.GetConnection())
+        {
+            try
+            {
+                connection.Open();
+
+                MySqlCommand myCommand = new MySqlCommand();
+                myCommand.Connection = connection;
+                myCommand.CommandText = @"SELECT p.*, pat.name as NomDuPatient 
+                      FROM Prescription p
+                      JOIN Patients pat ON p.id_patients = pat.id_patients
+                      WHERE p.validity >= @dateDebut AND p.validity <= @dateFin
+                      ORDER BY p.validity DESC";
+
+                myCommand.Parameters.AddWithValue("@dateDebut", dateDebut);
+                myCommand.Parameters.AddWithValue("@dateFin", dateFin);
+
+                using var myReader = myCommand.ExecuteReader();
+                {
+                    while (myReader.Read())
+                    {
+                        int prescriptionId = myReader.GetInt32("id_prescription");
+                        int patientId = myReader.GetInt32("id_patients");
+                        int userId = myReader.GetInt32("id_users");
+                        int quantity = myReader.GetInt32("quantity");
+                        DateTime validity = myReader.GetDateTime("validity");
+
+                        Prescription prescription = new Prescription(prescriptionId, patientId, userId, quantity, validity);
+                        prescription.NomAffichage = myReader.GetString("NomDuPatient");
+                        prescriptions.Add(prescription);
+                    }
+                }
+
+                connection.Close();
+                return prescriptions;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error retrieving prescriptions by date range: " + ex.Message);
+            }
+        }
+    }
+
+    // 1. Nombre total de prescriptions sur une période
+    public int GetCountByDateRange(DateTime dateDebut, DateTime dateFin)
+    {
+        using (var connection = db.GetConnection())
+        {
+            try
+            {
+                connection.Open();
+
+                MySqlCommand myCommand = new MySqlCommand();
+                myCommand.Connection = connection;
+                myCommand.CommandText = @"SELECT COUNT(*) 
+                      FROM Prescription 
+                      WHERE validity >= @dateDebut AND validity <= @dateFin";
+
+                myCommand.Parameters.AddWithValue("@dateDebut", dateDebut);
+                myCommand.Parameters.AddWithValue("@dateFin", dateFin);
+
+                int count = Convert.ToInt32(myCommand.ExecuteScalar());
+                connection.Close();
+                return count;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error counting prescriptions: " + ex.Message);
+            }
+        }
+    }
+
+    // 2. Nombre de prescriptions par patient (sur une période)
+    public Dictionary<string, int> GetCountByPatient(DateTime dateDebut, DateTime dateFin)
+    {
+        Dictionary<string, int> stats = new Dictionary<string, int>();
+
+        using (var connection = db.GetConnection())
+        {
+            try
+            {
+                connection.Open();
+
+                MySqlCommand myCommand = new MySqlCommand();
+                myCommand.Connection = connection;
+                myCommand.CommandText = @"SELECT 
+                      CONCAT(pat.firstname, ' ', pat.name) as NomComplet,
+                      COUNT(*) as NbPrescriptions
+                      FROM Prescription p
+                      JOIN Patients pat ON p.id_patients = pat.id_patients
+                      WHERE p.validity >= @dateDebut AND p.validity <= @dateFin
+                      GROUP BY p.id_patients, pat.firstname, pat.name
+                      ORDER BY NbPrescriptions DESC";
+
+                myCommand.Parameters.AddWithValue("@dateDebut", dateDebut);
+                myCommand.Parameters.AddWithValue("@dateFin", dateFin);
+
+                using var myReader = myCommand.ExecuteReader();
+                {
+                    while (myReader.Read())
+                    {
+                        string nomComplet = myReader.GetString("NomComplet");
+                        int nbPrescriptions = myReader.GetInt32("NbPrescriptions");
+                        stats.Add(nomComplet, nbPrescriptions);
+                    }
+                }
+
+                connection.Close();
+                return stats;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error getting prescriptions by patient: " + ex.Message);
+            }
+        }
+    }
+
+    // 3. Nombre de prescriptions par praticien (utilisateur/docteur) sur une période
+    public Dictionary<string, int> GetCountByPractitioner(DateTime dateDebut, DateTime dateFin)
+    {
+        Dictionary<string, int> stats = new Dictionary<string, int>();
+
+        using (var connection = db.GetConnection())
+        {
+            try
+            {
+                connection.Open();
+
+                MySqlCommand myCommand = new MySqlCommand();
+                myCommand.Connection = connection;
+                myCommand.CommandText = @"SELECT 
+                      CONCAT(u.firstname, ' ', u.name) as NomComplet,
+                      COUNT(*) as NbPrescriptions
+                      FROM Prescription p
+                      JOIN Users u ON p.id_users = u.id_users
+                      WHERE p.validity >= @dateDebut AND p.validity <= @dateFin
+                      GROUP BY p.id_users, u.firstname, u.name
+                      ORDER BY NbPrescriptions DESC";
+
+                myCommand.Parameters.AddWithValue("@dateDebut", dateDebut);
+                myCommand.Parameters.AddWithValue("@dateFin", dateFin);
+
+                using var myReader = myCommand.ExecuteReader();
+                {
+                    while (myReader.Read())
+                    {
+                        string nomComplet = myReader.GetString("NomComplet");
+                        int nbPrescriptions = myReader.GetInt32("NbPrescriptions");
+                        stats.Add(nomComplet, nbPrescriptions);
+                    }
+                }
+
+                connection.Close();
+                return stats;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error getting prescriptions by practitioner: " + ex.Message);
+            }
+        }
+    }
+
+    // 4. Nombre moyen de médicaments par ordonnance (sur une période)
+    public double GetAverageMedicinesPerPrescription(DateTime dateDebut, DateTime dateFin)
+    {
+        using (var connection = db.GetConnection())
+        {
+            try
+            {
+                connection.Open();
+
+                MySqlCommand myCommand = new MySqlCommand();
+                myCommand.Connection = connection;
+
+                // On compte le nombre de lignes dans Appartient pour chaque prescription sur la période
+                myCommand.CommandText = @"
+                SELECT AVG(nb_medicines) as moyenne
+                FROM (
+                    SELECT p.id_prescription, COUNT(a.id_medicine) as nb_medicines
+                    FROM Prescription p
+                    LEFT JOIN Appartient a ON p.id_prescription = a.id_prescription
+                    WHERE p.validity >= @dateDebut AND p.validity <= @dateFin
+                    GROUP BY p.id_prescription
+                ) as sub";
+
+                myCommand.Parameters.AddWithValue("@dateDebut", dateDebut);
+                myCommand.Parameters.AddWithValue("@dateFin", dateFin);
+
+                var result = myCommand.ExecuteScalar();
+                connection.Close();
+
+                // Si aucune prescription, retourner 0
+                if (result == DBNull.Value || result == null)
+                    return 0;
+
+                return Convert.ToDouble(result);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error calculating average medicines per prescription: " + ex.Message);
+            }
+        }
+    }
+
+    // 5. Quantité totale prescrite (sur une période)
+    public int GetTotalQuantityPrescribed(DateTime dateDebut, DateTime dateFin)
+    {
+        using (var connection = db.GetConnection())
+        {
+            try
+            {
+                connection.Open();
+
+                MySqlCommand myCommand = new MySqlCommand();
+                myCommand.Connection = connection;
+                myCommand.CommandText = @"SELECT IFNULL(SUM(quantity), 0) 
+                      FROM Prescription 
+                      WHERE validity >= @dateDebut AND validity <= @dateFin";
+
+                myCommand.Parameters.AddWithValue("@dateDebut", dateDebut);
+                myCommand.Parameters.AddWithValue("@dateFin", dateFin);
+
+                int total = Convert.ToInt32(myCommand.ExecuteScalar());
+                connection.Close();
+                return total;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error calculating total quantity: " + ex.Message);
+            }
+        }
+
+    }
+
+    // Récupérer les prescriptions sans médicaments (anomalies) sur une période
+    public List<Prescription> GetPrescriptionsWithoutMedicines(DateTime dateDebut, DateTime dateFin)
+    {
+        List<Prescription> prescriptions = new List<Prescription>();
+
+        using (var connection = db.GetConnection())
+        {
+            try
+            {
+                connection.Open();
+
+                MySqlCommand myCommand = new MySqlCommand();
+                myCommand.Connection = connection;
+                myCommand.CommandText = @"
+                SELECT p.*, pat.name as NomDuPatient, pat.firstname as PrenomDuPatient,
+                       u.name as NomDocteur, u.firstname as PrenomDocteur
+                FROM Prescription p
+                JOIN Patients pat ON p.id_patients = pat.id_patients
+                JOIN Users u ON p.id_users = u.id_users
+                LEFT JOIN Appartient a ON p.id_prescription = a.id_prescription
+                WHERE p.validity >= @dateDebut 
+                  AND p.validity <= @dateFin
+                  AND a.id_medicine IS NULL
+                ORDER BY p.validity DESC";
+
+                myCommand.Parameters.AddWithValue("@dateDebut", dateDebut);
+                myCommand.Parameters.AddWithValue("@dateFin", dateFin);
+
+                using var myReader = myCommand.ExecuteReader();
+                {
+                    while (myReader.Read())
+                    {
+                        int prescriptionId = myReader.GetInt32("id_prescription");
+                        int patientId = myReader.GetInt32("id_patients");
+                        int userId = myReader.GetInt32("id_users");
+                        int quantity = myReader.GetInt32("quantity");
+                        DateTime validity = myReader.GetDateTime("validity");
+
+                        Prescription prescription = new Prescription(prescriptionId, patientId, userId, quantity, validity);
+                        prescription.NomAffichage = myReader.GetString("PrenomDuPatient") + " " + myReader.GetString("NomDuPatient");
+                        prescriptions.Add(prescription);
+                    }
+                }
+
+                connection.Close();
+                return prescriptions;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error retrieving prescriptions without medicines: " + ex.Message);
+            }
+        }
+    }
+
+    // Compter le nombre total d'ordonnances sans médicaments
+    public int GetCountPrescriptionsWithoutMedicines(DateTime dateDebut, DateTime dateFin)
+    {
+        using (var connection = db.GetConnection())
+        {
+            try
+            {
+                connection.Open();
+
+                MySqlCommand myCommand = new MySqlCommand();
+                myCommand.Connection = connection;
+                myCommand.CommandText = @"
+                SELECT COUNT(DISTINCT p.id_prescription) as total
+                FROM Prescription p
+                LEFT JOIN Appartient a ON p.id_prescription = a.id_prescription
+                WHERE p.validity >= @dateDebut 
+                  AND p.validity <= @dateFin
+                  AND a.id_medicine IS NULL";
+
+                myCommand.Parameters.AddWithValue("@dateDebut", dateDebut);
+                myCommand.Parameters.AddWithValue("@dateFin", dateFin);
+
+                int count = Convert.ToInt32(myCommand.ExecuteScalar());
+                connection.Close();
+                return count;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error counting prescriptions without medicines: " + ex.Message);
+            }
+        }
+    }
 }
+

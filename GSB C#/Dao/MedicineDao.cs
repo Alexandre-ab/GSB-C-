@@ -216,4 +216,105 @@ public class MedicineDAO
             }
         }
     }
+    // TOP 10 des médicaments les plus prescrits (sur une période)
+    public List<MedicineStats> GetTop10MostPrescribed(DateTime dateDebut, DateTime dateFin)
+    {
+        List<MedicineStats> stats = new List<MedicineStats>();
+
+        using (var connection = db.GetConnection())
+        {
+            try
+            {
+                connection.Open();
+
+                MySqlCommand myCommand = new MySqlCommand();
+                myCommand.Connection = connection;
+                myCommand.CommandText = @"
+                SELECT 
+                    m.id_medicine,
+                    m.name,
+                    COUNT(a.id_prescription) as NbPrescriptions
+                FROM Medicine m
+                LEFT JOIN Appartient a ON m.id_medicine = a.id_medicine
+                LEFT JOIN Prescription p ON a.id_prescription = p.id_prescription
+                WHERE p.validity >= @dateDebut AND p.validity <= @dateFin
+                GROUP BY m.id_medicine, m.name
+                ORDER BY NbPrescriptions DESC
+                LIMIT 10";
+
+                myCommand.Parameters.AddWithValue("@dateDebut", dateDebut);
+                myCommand.Parameters.AddWithValue("@dateFin", dateFin);
+
+                using var myReader = myCommand.ExecuteReader();
+                {
+                    while (myReader.Read())
+                    {
+                        int medicineId = myReader.GetInt32("id_medicine");
+                        string nom = myReader.GetString("name");
+                        int nbPrescriptions = myReader.GetInt32("NbPrescriptions");
+
+                        stats.Add(new MedicineStats(medicineId, nom, nbPrescriptions, 0));
+                    }
+                }
+
+                connection.Close();
+                return stats;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error getting top 10 most prescribed medicines: " + ex.Message);
+            }
+        }
+    }
+
+    // TOP 10 des médicaments les plus consommés (quantité totale sur une période)
+    public List<MedicineStats> GetTop10MostConsumed(DateTime dateDebut, DateTime dateFin)
+    {
+        List<MedicineStats> stats = new List<MedicineStats>();
+
+        using (var connection = db.GetConnection())
+        {
+            try
+            {
+                connection.Open();
+
+                MySqlCommand myCommand = new MySqlCommand();
+                myCommand.Connection = connection;
+                myCommand.CommandText = @"
+                SELECT 
+                    m.id_medicine,
+                    m.name,
+                    IFNULL(SUM(p.quantity), 0) as QuantiteTotale
+                FROM Medicine m
+                LEFT JOIN Appartient a ON m.id_medicine = a.id_medicine
+                LEFT JOIN Prescription p ON a.id_prescription = p.id_prescription
+                WHERE p.validity >= @dateDebut AND p.validity <= @dateFin
+                GROUP BY m.id_medicine, m.name
+                ORDER BY QuantiteTotale DESC
+                LIMIT 10";
+
+                myCommand.Parameters.AddWithValue("@dateDebut", dateDebut);
+                myCommand.Parameters.AddWithValue("@dateFin", dateFin);
+
+                using var myReader = myCommand.ExecuteReader();
+                {
+                    while (myReader.Read())
+                    {
+                        int medicineId = myReader.GetInt32("id_medicine");
+                        string nom = myReader.GetString("name");
+                        int quantiteTotale = myReader.GetInt32("QuantiteTotale");
+
+                        stats.Add(new MedicineStats(medicineId, nom, 0, quantiteTotale));
+                    }
+                }
+
+                connection.Close();
+                return stats;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error getting top 10 most consumed medicines: " + ex.Message);
+            }
+        }
+    }
 }
