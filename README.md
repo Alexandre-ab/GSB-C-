@@ -1,6 +1,6 @@
 # GSB WinForms
 
-Application WinForms (C#, .NET 8) pour gérer prescriptions, médicaments, patients et utilisateurs avec MySQL.
+Application WinForms (C#, .NET Framework) de gestion des comptes-rendus de visite des visiteurs médicaux pour le laboratoire Galaxy Swiss Bourdin (GSB) avec MySQL.
 
 ---
 
@@ -22,6 +22,7 @@ Application WinForms (C#, .NET 8) pour gérer prescriptions, médicaments, patie
 ## Sommaire (guide rapide)
 - [Prérequis](#prérequis)
 - [Installation & configuration](#installation--configuration)
+- [Comptes de test](#-comptes-de-test)
 - [Démarrage rapide](#démarrage-rapide)
 - [Architecture](#architecture)
 - [Résumé API (DAO)](#résumé-api-dao)
@@ -34,34 +35,47 @@ Application WinForms (C#, .NET 8) pour gérer prescriptions, médicaments, patie
 - [Build / Distribution](#build--distribution)
 - [Dépendances](#dépendances-nuget)
 - [Gestion des erreurs](#gestion-des-erreurs)
-- [Support / FAQ](#support--faq)t
+- [Support / FAQ](#support--faq)
 
 ## Prérequis
-- .NET 8 SDK
+- .NET Framework 4.8 (ou version compatible)
+- Microsoft Visual Studio 2022
 - MySQL (adapter port/identifiants)
-- Accès réseau base de données (`localhost:3307` par défaut)
+- Accès réseau base de données (`localhost:3306` par défaut)
 
 ## Installation & configuration
 1. Cloner le dépôt.
+```bash
+git clone https://github.com/Alexandre-ab/GSB-C-.git
+cd GSB-C-
+```
 2. Démarrer la base de données :
    - **Option A (Docker - Recommandé)** :
      - Aller dans le dossier `docker/`.
      - Lancer : `docker-compose up -d`.
-     - La base `bts-gsb` est automatiquement créée et peuplée sur `localhost:3307` (pwd: `rootpassword`).
-     - PhpMyAdmin est accessible sur `http://localhost:8080`.
+     - La base `bts-gsb` est automatiquement créée et peuplée sur `localhost:3306`.
    - **Option B (Manuelle)** :
      - Importer le fichier `docker/init.sql` dans votre serveur MySQL.
-     - Adapter la chaîne de connexion dans `Dao/Database.cs` (serveur, port, user, pwd) si nécessaire.
-3. Restaurer les dépendances NuGet : `dotnet restore`
+     - Adapter la chaîne de connexion dans `App.config` (serveur, port, user, pwd) si nécessaire.
+3. Ouvrir `GSB C#.sln` dans Visual Studio 2022, restaurer les packages NuGet.
+
+## 🔑 Comptes de test
+
+| Rôle | Email | Mot de passe | Accès |
+|------|-------|-------------|-------|
+| **Admin** | claire.lefevre@example.com | `123` | Gestion visiteurs + tous les rapports |
+| **User** (visiteur médical) | emma.petit@example.com | `1234` | Ses propres rapports uniquement |
+
+> **Note :** les mots de passe sont stockés en clair dans la base de données dans ce contexte pédagogique. En production, un hachage bcrypt serait implémenté.
 
 ## Démarrage rapide
-- Visual Studio : ouvrir `GSB C#.csproj`, choisir le profil, F5.
+- Visual Studio : ouvrir `GSB C#.sln`, choisir le profil, F5.
 - CLI : `dotnet run --project "GSB C#.csproj"`
 
 ## Architecture
 - DAO (`Dao/`) : MySQL (`Database`) + CRUD pour `Medicine`, `Patients`, `Prescription`, `User`, `Appartient`.
 - Modèles (`Models/`) : entités (`Medicine`, `Patients`, `Prescription`, `User`, `Appartient`, `UserSession`).
-- Interface (`Forms/`) : formulaires d’admin, patients/médecins, prescriptions, ajout utilisateurs.
+- Interface (`Forms/`) : formulaires d'admin, visiteurs/praticiens, prescriptions, ajout utilisateurs.
 - Utilitaires (`Utils/`) : `ExporterPDF` (iTextSharp) pour PDF.
 
 ## Résumé API (DAO)
@@ -69,9 +83,11 @@ Application WinForms (C#, .NET 8) pour gérer prescriptions, médicaments, patie
 - `Database` : fournit les connexions MySQL.
 
 ## Fonctionnalités clés
-- Gestion utilisateurs/sessions.
+- Authentification avec gestion des rôles (Admin / User).
+- Consultation de la liste des praticiens visités.
+- Saisie et modification des comptes-rendus de visite (CRUD).
+- Gestion des visiteurs par l'administrateur (ajout, invitation, suppression).
 - Médicaments (CRUD), prescriptions et associations médicament/prescription.
-- Gestion patients.
 - Export PDF.
 
 ## Base de données
@@ -88,7 +104,7 @@ Utilisez le fichier `docker/init.sql` pour créer la base de données, les table
 Alternativement, suivez les étapes manuelles :
 1. Créer la base `bts-gsb`.
 2. Importer le contenu de `docker/init.sql`.
-3. Ajuster la chaîne de connexion dans `Dao/Database.cs`.
+3. Ajuster la chaîne de connexion dans `App.config`.
 
 SQL minimal (exemple) :
 ```sql
@@ -127,33 +143,38 @@ CREATE TABLE Appartient (
 );
 ```
 
-## Flux d’usage
+## Flux d'usage
 - Création utilisateur : `FormAdmin` / `FormAddUser`, stocké dans `Users`.
-- Patients : `FormDoctor` / `FormAddpatient` (CRUD `Patients`).
+- Praticiens : `FormDoctor` / `FormAddpatient` (CRUD `Patients`).
 - Médicaments : `FormAdmin` / `FormDetailMedicine` / `FormPrescription` (CRUD `Medicine`).
-- Prescription : `FormPrescription` (patient, médicaments via `Appartient`, posologie/quantité), enregistrement dans `Prescription`.
+- Prescription : `FormPrescription` (praticien, médicaments via `Appartient`, posologie/quantité), enregistrement dans `Prescription`.
 - Export PDF : via `Utils/ExporterPDF`.
 
 ## Navigation des formulaires
+- `FrmConnexion` : authentification sécurisée.
+- `FrmMenu` : menu principal, navigation entre fenêtres.
+- `FrmRapport` : gestion CRUD des rapports de visite.
 - `FormAdmin` : administration (utilisateurs, médicaments).
-- `FormDoctor` : praticien (patients, prescriptions).
+- `FormDoctor` : praticien (praticiens, prescriptions).
 - `FormPrescription` : création/édition de prescriptions et associations.
-- `FormAddpatient`, `FormAddUser`, `FormModifyAdmin`, `FormDetailMedicine` : écrans dédiés d’ajout/édition.
-- `FormPrescription` + `FormDetailMedicine` : détail médicament dans le contexte d’une prescription.
+- `FormAddpatient`, `FormAddUser`, `FormModifyAdmin`, `FormDetailMedicine` : écrans dédiés d'ajout/édition.
+- `FormPrescription` + `FormDetailMedicine` : détail médicament dans le contexte d'une prescription.
 
 ## Détail DAO / modèles
 - DAO : GetAll, GetById, filtres, insert, update, delete.
 - Modèles : propriétés mappées aux colonnes (voir `Models/*.cs`).
 
 ## Sécurité
-- Hash des mots de passe (bcrypt/argon2), jamais en clair.
-- Compte MySQL à privilèges limités dédié à l’app.
-- Pas de credentials commités : variables d’environnement ou secrets utilisateur.
-- Journaliser les erreurs côté serveur sans exposer d’infos sensibles.
+- Requêtes préparées pour prévenir les injections SQL.
+- Gestion des rôles (Admin/User) conditionnant l'accès aux fonctionnalités.
+- Mots de passe stockés en clair dans ce contexte pédagogique. En production, un hachage (bcrypt ou argon2) serait implémenté pour sécuriser les credentials.
+- Compte MySQL à privilèges limités dédié à l'app.
+- Pas de credentials commités : variables d'environnement ou secrets utilisateur.
+- Journaliser les erreurs côté serveur sans exposer d'infos sensibles.
 
 ## Connexion DB
-- Exemple : `Server=localhost;Port=3307;Database=bts-gsb;Uid=root;Pwd=xxxx;`
-- Variante env var : lire `GSB_DB_CONN` dans `Dao/Database.cs` avec fallback.
+- Exemple : `Server=localhost;Port=3306;Database=bts-gsb;Uid=root;Pwd=xxxx;`
+- Configuration dans `App.config`.
 - Production : privilégier appsettings / secrets / env vars.
 
 ## Build / Distribution
@@ -163,13 +184,13 @@ CREATE TABLE Appartient (
   - Binaire dans `publish/` à distribuer avec dépendances.
 
 ## Dépendances NuGet
-- `MySql.Data` : accès MySQL.
+- `MySql.Data` : accès MySQL (MySQL Connector/NET).
 - `iTextSharp` : génération PDF (`Utils/ExporterPDF.cs`).
 
 ## Gestion des erreurs
-- Connexion MySQL : vérifier hôte/port/identifiants dans `Dao/Database.cs`; capturer les exceptions MySQL, afficher un message utilisateur.
-- Exceptions DAO : try/catch dans l’UI pour éviter les crashs et journaliser.
-- Changement d’environnement : surcharger la chaîne de connexion via env vars ou config.
+- Connexion MySQL : vérifier hôte/port/identifiants dans `App.config`; capturer les exceptions MySQL, afficher un message utilisateur.
+- Exceptions DAO : try/catch dans l'UI pour éviter les crashs et journaliser.
+- Changement d'environnement : surcharger la chaîne de connexion via env vars ou config.
 
 ## Support / FAQ
 - Connexion MySQL : vérifier hôte/port/identifiants.
