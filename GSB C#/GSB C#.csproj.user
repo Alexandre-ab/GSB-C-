@@ -25,5 +25,8 @@
     <Compile Update="Forms\FormPrescription.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\FormRapport.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

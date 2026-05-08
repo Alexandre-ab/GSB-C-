@@ -242,6 +242,23 @@ ALTER TABLE `Patients`
 ALTER TABLE `Prescription`
   ADD CONSTRAINT `Prescription_ibfk_1` FOREIGN KEY (`id_patients`) REFERENCES `Patients` (`id_patients`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `Prescription_ibfk_2` FOREIGN KEY (`id_users`) REFERENCES `Users` (`id_users`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Structure de la table `Rapport`
+--
+
+CREATE TABLE `Rapport` (
+  `id_rapport` int NOT NULL AUTO_INCREMENT,
+  `id_users` int NOT NULL,
+  `id_patients` int NOT NULL,
+  `date_visite` date NOT NULL,
+  `motif` varchar(255) NOT NULL,
+  `bilan` text,
+  PRIMARY KEY (`id_rapport`),
+  CONSTRAINT `Rapport_ibfk_1` FOREIGN KEY (`id_users`) REFERENCES `Users` (`id_users`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `Rapport_ibfk_2` FOREIGN KEY (`id_patients`) REFERENCES `Patients` (`id_patients`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

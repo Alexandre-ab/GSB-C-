@@ -44,6 +44,8 @@
 
                     buttonPatient = new Button();
 
+                    buttonRapports = new Button();
+
                     Deconnexion = new Button();
 
                     panelHeader = new Panel();
@@ -198,7 +200,37 @@
 
                     buttonPatient.Click += buttonPatient_Click;
 
-                    // 
+                    //
+
+                    // buttonRapports
+
+                    //
+
+                    buttonRapports.BackColor = Color.FromArgb(255, 193, 7);
+
+                    buttonRapports.FlatAppearance.BorderSize = 0;
+
+                    buttonRapports.FlatStyle = FlatStyle.Flat;
+
+                    buttonRapports.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+
+                    buttonRapports.ForeColor = Color.Black;
+
+                    buttonRapports.Location = new Point(210, 12);
+
+                    buttonRapports.Name = "buttonRapports";
+
+                    buttonRapports.Size = new Size(180, 40);
+
+                    buttonRapports.TabIndex = 3;
+
+                    buttonRapports.Text = "Mes Rapports";
+
+                    buttonRapports.UseVisualStyleBackColor = false;
+
+                    buttonRapports.Click += buttonRapports_Click;
+
+                    //
 
                     // Deconnexion
 
@@ -282,6 +314,8 @@
 
                     panelFooter.Controls.Add(buttonPatient);
 
+                    panelFooter.Controls.Add(buttonRapports);
+
                     panelFooter.Controls.Add(prescription);
 
                     panelFooter.Dock = DockStyle.Bottom;
@@ -343,6 +377,8 @@
                 private Button prescription;
 
                 private Button buttonPatient;
+
+                private Button buttonRapports;
 
                 private Button Deconnexion;
 

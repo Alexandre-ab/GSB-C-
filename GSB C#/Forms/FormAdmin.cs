@@ -57,6 +57,14 @@ namespace GSB_C_.Forms
             formModifyAdmin.ShowDialog();
             this.Show();
         }
+
+        private void buttonRapports_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            FormRapport formRapport = new FormRapport();
+            formRapport.ShowDialog();
+            this.Show();
+        }
     }
 }
     

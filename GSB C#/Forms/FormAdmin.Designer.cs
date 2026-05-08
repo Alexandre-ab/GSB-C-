@@ -33,6 +33,7 @@
             dataGridViewAdmin = new DataGridView();
             buttonAdUser = new Button();
             buttonModifySuppUser = new Button();
+            buttonRapports = new Button();
             Deconnexion = new Button();
             panelHeader = new Panel();
             labelTitle = new Label();
@@ -110,7 +111,22 @@
             buttonModifySuppUser.Text = "Modify / Delete User";
             buttonModifySuppUser.UseVisualStyleBackColor = false;
             buttonModifySuppUser.Click += buttonModifySuppUser_Click;
-            // 
+            //
+            // buttonRapports
+            //
+            buttonRapports.BackColor = Color.FromArgb(255, 193, 7);
+            buttonRapports.FlatAppearance.BorderSize = 0;
+            buttonRapports.FlatStyle = FlatStyle.Flat;
+            buttonRapports.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+            buttonRapports.ForeColor = Color.Black;
+            buttonRapports.Location = new Point(408, 12);
+            buttonRapports.Name = "buttonRapports";
+            buttonRapports.Size = new Size(180, 40);
+            buttonRapports.TabIndex = 5;
+            buttonRapports.Text = "Voir les Rapports";
+            buttonRapports.UseVisualStyleBackColor = false;
+            buttonRapports.Click += buttonRapports_Click;
+            //
             // Deconnexion
             // 
             Deconnexion.BackColor = Color.White;
@@ -151,6 +167,7 @@
             // panelFooter
             // 
             panelFooter.BackColor = Color.White;
+            panelFooter.Controls.Add(buttonRapports);
             panelFooter.Controls.Add(buttonModifySuppUser);
             panelFooter.Controls.Add(buttonAdUser);
             panelFooter.Dock = DockStyle.Bottom;
@@ -183,6 +200,7 @@
         private DataGridView dataGridViewAdmin;
         private Button buttonAdUser;
         private Button buttonModifySuppUser;
+        private Button buttonRapports;
         private Button Deconnexion;
         private Panel panelHeader;
         private Label labelTitle;
